@@ -2,6 +2,7 @@
 
 Chạy từ thư mục code/:   python -m unittest test_code -v
 """
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -19,6 +20,7 @@ import final as FN
 import inference as I
 import losses as L
 import model as M
+import sync as SY
 import tables as TB
 import train as T
 
@@ -387,6 +389,75 @@ class TestPipeline(unittest.TestCase):
         path = TB.write_results_xlsx(self.root / "r.xlsx", {"Backbones": df, "Summary": ms}, {"Backbones": "val_macro_f1"})
         back = pd.read_excel(path, sheet_name=None)
         self.assertEqual(set(back), {"Backbones", "Summary"})
+
+
+class TestSync(unittest.TestCase):
+    def sh(self, *a, cwd=None):
+        import subprocess
+        return subprocess.run(a, cwd=cwd, capture_output=True, text=True, check=True).stdout
+
+    def test_sync_pushes_real_files_and_restores_symlinks(self):
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            self.sh("git", "init", "-q", "--bare", "-b", "main", str(d / "remote.git"))
+            repo = d / "repo"
+            self.sh("git", "clone", "-q", str(d / "remote.git"), str(repo))
+            self.sh("git", "config", "user.email", "t@t", cwd=repo)
+            self.sh("git", "config", "user.name", "t", cwd=repo)
+            (repo / "README.md").write_text("x")
+            self.sh("git", "add", "-A", cwd=repo)
+            self.sh("git", "commit", "-qm", "init", cwd=repo)
+            self.sh("git", "push", "-q", "origin", "HEAD:main", cwd=repo)
+            sub = repo / "submissions" / "s"
+            (sub / "code").mkdir(parents=True)
+            (sub / "code" / "a.py").write_text("print(1)")
+            drv = d / "drive"
+            for dd in ("curves", "predictions", "ckpt"):
+                (drv / dd).mkdir(parents=True)
+                (sub / dd).symlink_to(drv / dd)
+            (drv / "curves" / "B01_resnet50.png").write_bytes(b"png")
+            for n in ("T00_seed0_test.csv", "F01_seed0_test.csv", "F01uncal_seed0_test.csv", "B01_seed0_val.csv"):
+                (drv / "predictions" / n).write_text("x")
+            (drv / "ckpt" / "best.pt").write_bytes(b"0" * 1000)
+
+            r = SY.sync_to_repo(repo, sub, "first")
+            self.assertTrue(r["committed"] and r["pushed"], r)
+            files = self.sh("git", "--git-dir", str(d / "remote.git"), "ls-tree", "-r", "--name-only", "main").split()
+            base = "submissions/s/"
+            self.assertIn(base + "curves/B01_resnet50.png", files)
+            self.assertIn(base + "predictions/T00_seed0_test.csv", files)
+            self.assertIn(base + "predictions/F01uncal_seed0_test.csv", files)
+            self.assertNotIn(base + "predictions/B01_seed0_val.csv", files)   # không phải mốc/chung kết
+            self.assertFalse(any("ckpt" in f or f.endswith(".pt") for f in files))
+            for dd in ("curves", "predictions", "ckpt"):                       # symlink được khôi phục
+                self.assertTrue((sub / dd).is_symlink())
+                self.assertEqual(Path(os.path.realpath(sub / dd)), (drv / dd).resolve())
+            self.assertTrue((drv / "curves" / "B01_resnet50.png").exists())    # Drive còn nguyên
+
+            r2 = SY.sync_to_repo(repo, sub, "again")                           # không có gì mới
+            self.assertFalse(r2["committed"])
+            (drv / "predictions" / "F01_seed1_test.csv").write_text("y")
+            r3 = SY.sync_to_repo(repo, sub, "third")
+            self.assertTrue(r3["pushed"], r3)
+
+    def test_sync_failure_is_nonfatal_and_restores_symlinks(self):
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            self.sh("git", "init", "-q", "-b", "main", str(d / "repo"))
+            repo = d / "repo"
+            self.sh("git", "config", "user.email", "t@t", cwd=repo)
+            self.sh("git", "config", "user.name", "t", cwd=repo)
+            self.sh("git", "remote", "add", "origin", str(d / "does_not_exist.git"), cwd=repo)
+            sub = repo / "sub"
+            sub.mkdir()
+            (d / "drv" / "curves").mkdir(parents=True)
+            (d / "drv" / "curves" / "a.png").write_bytes(b"p")
+            (sub / "curves").symlink_to(d / "drv" / "curves")
+            r = SY.sync_to_repo(repo, sub, "m")
+            self.assertTrue(r["committed"])
+            self.assertFalse(r["pushed"])
+            self.assertIsNotNone(r["error"])
+            self.assertTrue((sub / "curves").is_symlink())
 
 
 if __name__ == "__main__":
