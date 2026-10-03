@@ -256,7 +256,8 @@ def _softmax(z: np.ndarray) -> np.ndarray:
 def plot_curves(history: list[dict], path: str | Path, title: str, lr_steps=None) -> None:
     """Vẽ loss train/val, macro-F1 val (và top-1 val), LR theo bước -> ảnh .png (GUIDE.md mục 6.2)."""
     import matplotlib
-    matplotlib.use("Agg")
+    if "matplotlib.pyplot" not in sys.modules:  # trong notebook pyplot đã nạp: đừng đổi backend inline
+        matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
     h = pd.DataFrame(history)

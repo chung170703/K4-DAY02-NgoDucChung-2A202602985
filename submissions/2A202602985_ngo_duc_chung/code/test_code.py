@@ -20,6 +20,7 @@ import final as FN
 import inference as I
 import losses as L
 import model as M
+import report_figs as RF
 import sync as SY
 import tables as TB
 import train as T
@@ -458,6 +459,46 @@ class TestSync(unittest.TestCase):
             self.assertFalse(r["pushed"])
             self.assertIsNotNone(r["error"])
             self.assertTrue((sub / "curves").is_symlink())
+
+
+class TestReportFigs(unittest.TestCase):
+    def test_figs_and_per_class(self):
+        import eval as ev
+        rng = np.random.default_rng(0)
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            names = D.CLASS_NAMES
+            n = 180
+            y = np.arange(n) % 9
+            files = [f"im{i}.jpg" for i in range(n)]
+            (d / "images").mkdir()
+            for f in files:
+                Image.fromarray(rng.integers(0, 255, (32, 32, 3), dtype=np.uint8)).save(d / "images" / f)
+            pd.DataFrame({"Filename": files, "Label": y, "Species": [names[i] for i in y]}).to_csv(d / "test.csv", index=False)
+            pd.DataFrame({"Filename": files, "Label": y, "Species": [names[i] for i in y]}).to_csv(d / "labels.csv", index=False)
+            for seed in (0, 1):
+                z = rng.normal(size=(n, 9)); z[np.arange(n), y] += 3.0
+                z[y == 0, 7] += 2.5  # Chinee Apple hay bị đoán thành Snake Weed
+                p = np.exp(z) / np.exp(z).sum(1, keepdims=True)
+                ev.save_predictions(d / f"F01_seed{seed}_test.csv", files, y, p)
+            fig, cm, top = RF.confusion_figure(str(d / "F01_seed*_test.csv"), str(d / "test.csv"), str(d / "labels.csv"),
+                                               "F01", d / "cm.png")
+            self.assertTrue((d / "cm.png").exists())
+            self.assertEqual(cm.shape, (9, 9))
+            self.assertAlmostEqual(cm.sum(), n, places=6)
+            self.assertEqual(top.iloc[0]["thật"], "Chinee Apple")
+            self.assertEqual(top.iloc[0]["đoán"], "Snake Weed")
+            fig2, shown = RF.misclassified_grid(str(d / "F01_seed0_test.csv"), str(d / "images"), names, 8, (0, 7), d / "err.png")
+            self.assertTrue((d / "err.png").exists())
+            self.assertTrue(0 < len(shown) <= 8)
+            pc = RF.per_class_sheet({"F01": str(d / "F01_seed*_test.csv")}, str(d / "test.csv"), str(d / "labels.csv"))
+            self.assertEqual(len(pc), 9)
+            self.assertTrue(((pc["recall"] >= 0) & (pc["recall"] <= 1)).all())
+            self.assertEqual(pc["n_seed"].unique().tolist(), [2])
+            tr = pd.DataFrame({"exp_id": ["T01", "T02", "T03"], "trục": ["A", "B", "B"], "khác T00": ["x", "y", "z"],
+                               "delta_vs_T00": [-0.05, 0.01, 0.03]})
+            RF.ablation_figure(tr, 0.01, d / "abl.png")
+            self.assertTrue((d / "abl.png").exists())
 
 
 if __name__ == "__main__":
