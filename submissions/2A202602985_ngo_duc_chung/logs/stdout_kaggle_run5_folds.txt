@@ -1,0 +1,225 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+/tmp/ipykernel_23/111441024.py:12: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+  tf.extractall(ROOT)
+
+/tmp/ipykernel_23/111441024.py:12: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+  tf.extractall(ROOT)
+python 3.13.15 | torch 2.11.0+cu128 | timm 1.0.29
+GPU: Tesla T4
+tải images.zip, lần 1
+MD5 OK
+17509 ảnh (kỳ vọng 17509) | /content/data
+['labels.csv', 'test_subset0.csv', 'test_subset1.csv', 'test_subset2.csv', 'train_subset0.csv', 'train_subset1.csv', 'train_subset2.csv', 'val_subset0.csv', 'val_subset1.csv', 'val_subset2.csv']
+[03:05:31] bắt đầu | nền tảng=Kaggle | Drive backup=None | workers=4 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[03:05:31] === BẮT ĐẦU nhiều fold: kiểm tra split, huấn luyện F01, test một lượt
+Số ảnh: {'train': 10504, 'val': 3502, 'test': 3503} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '59.99%', 'val': '20.00%', 'test': '20.01%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      676   225   225
+1 Lantana           637   213   213
+2 Parkinsonia       619   206   206
+3 Parthenium        613   204   205
+4 Prickly Acacia    637   212   213
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        610   203   203
+8 Negatives        5463  1822  1821
+File thiếu trong /content/data: 0
+[03:05:31] === BẮT ĐẦU F01 fold1 train
+[F01f1 seed0] thiết bị: cuda | AMP: True
+Số ảnh: {'train': 10504, 'val': 3502, 'test': 3503} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '59.99%', 'val': '20.00%', 'test': '20.01%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      676   225   225
+1 Lantana           637   213   213
+2 Parkinsonia       619   206   206
+3 Parthenium        613   204   205
+4 Prickly Acacia    637   212   213
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        610   203   203
+8 Negatives        5463  1822  1821
+File thiếu trong /content/data: 0
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+[F01f1 seed0] ep 1/10 loss 0.7536 | val loss 0.2435 F1 0.8980 top1 0.9203 | 63s
+[F01f1 seed0] ep 2/10 loss 0.3531 | val loss 0.1374 F1 0.9467 top1 0.9583 | 49s
+[F01f1 seed0] ep 3/10 loss 0.2653 | val loss 0.1339 F1 0.9475 top1 0.9580 | 48s
+[F01f1 seed0] ep 4/10 loss 0.2140 | val loss 0.1146 F1 0.9547 top1 0.9646 | 48s
+[F01f1 seed0] ep 5/10 loss 0.1724 | val loss 0.1079 F1 0.9603 top1 0.9689 | 48s
+[F01f1 seed0] ep 6/10 loss 0.1350 | val loss 0.1023 F1 0.9618 top1 0.9689 | 48s
+[F01f1 seed0] ep 7/10 loss 0.0975 | val loss 0.1015 F1 0.9623 top1 0.9700 | 48s
+[F01f1 seed0] ep 8/10 loss 0.0748 | val loss 0.1005 F1 0.9662 top1 0.9729 | 48s
+[F01f1 seed0] ep 9/10 loss 0.0472 | val loss 0.1059 F1 0.9687 top1 0.9749 | 47s
+[F01f1 seed0] ep 10/10 loss 0.0474 | val loss 0.1119 F1 0.9661 top1 0.9729 | 47s
+[03:15:25] === XONG F01 fold1 train (9.9 phút)
+[03:15:25] === BẮT ĐẦU F01 fold1 final_predict
+[03:18:01] === XONG F01 fold1 final_predict (2.6 phút)
+{'exp_id': 'F01f1', 'seed': 0, 'tta': 'crop5', 'space': 'prob', 'T': 1.5362897879649124, 'n_views': 5, 'val_T_fit_on': 'val', 'val_uncal_macro_f1': 0.9691427229039122, 'val_uncal_ece': 0.013711323230734665, 'val_cal_macro_f1': 0.9691427229039122, 'val_cal_ece': 0.0038368301316774192, 'test_uncal_macro_f1': 0.9747297043599344, 'test_uncal_ece': 0.00818795160273337, 'test_cal_macro_f1': 0.9747297043599344, 'test_cal_ece': 0.005668223808163127}
+Số ảnh: {'train': 10506, 'val': 3502, 'test': 3501} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '60.00%', 'val': '20.00%', 'test': '20.00%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      676   225   225
+1 Lantana           638   212   213
+2 Parkinsonia       619   206   206
+3 Parthenium        613   205   204
+4 Prickly Acacia    637   213   212
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        610   203   203
+8 Negatives        5464  1821  1821
+File thiếu trong /content/data: 0
+[03:18:01] === BẮT ĐẦU F01 fold2 train
+[F01f2 seed0] thiết bị: cuda | AMP: True
+Số ảnh: {'train': 10506, 'val': 3502, 'test': 3501} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '60.00%', 'val': '20.00%', 'test': '20.00%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      676   225   225
+1 Lantana           638   212   213
+2 Parkinsonia       619   206   206
+3 Parthenium        613   205   204
+4 Prickly Acacia    637   213   212
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        610   203   203
+8 Negatives        5464  1821  1821
+File thiếu trong /content/data: 0
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+[F01f2 seed0] ep 1/10 loss 0.7557 | val loss 0.2147 F1 0.9118 top1 0.9312 | 49s
+[F01f2 seed0] ep 2/10 loss 0.3501 | val loss 0.1370 F1 0.9373 top1 0.9526 | 48s
+[F01f2 seed0] ep 3/10 loss 0.2643 | val loss 0.1203 F1 0.9478 top1 0.9606 | 48s
+[F01f2 seed0] ep 4/10 loss 0.2213 | val loss 0.1015 F1 0.9548 top1 0.9640 | 48s
+[F01f2 seed0] ep 5/10 loss 0.1736 | val loss 0.0914 F1 0.9598 top1 0.9694 | 48s
+[F01f2 seed0] ep 6/10 loss 0.1298 | val loss 0.0921 F1 0.9607 top1 0.9703 | 48s
+[F01f2 seed0] ep 7/10 loss 0.0990 | val loss 0.0855 F1 0.9657 top1 0.9734 | 48s
+[F01f2 seed0] ep 8/10 loss 0.0751 | val loss 0.0845 F1 0.9690 top1 0.9760 | 48s
+[F01f2 seed0] ep 9/10 loss 0.0554 | val loss 0.0876 F1 0.9690 top1 0.9763 | 47s
+[F01f2 seed0] ep 10/10 loss 0.0437 | val loss 0.0905 F1 0.9707 top1 0.9774 | 47s
+[03:27:28] === XONG F01 fold2 train (9.5 phút)
+[03:27:28] === BẮT ĐẦU F01 fold2 final_predict
+[03:29:59] === XONG F01 fold2 final_predict (2.5 phút)
+{'exp_id': 'F01f2', 'seed': 0, 'tta': 'crop5', 'space': 'prob', 'T': 1.5019596064924616, 'n_views': 5, 'val_T_fit_on': 'val', 'val_uncal_macro_f1': 0.9693171462071761, 'val_uncal_ece': 0.010436277649065559, 'val_cal_macro_f1': 0.9701215394966108, 'val_cal_ece': 0.0016348518288942558, 'test_uncal_macro_f1': 0.9729336865577144, 'test_uncal_ece': 0.010941501439167348, 'test_cal_macro_f1': 0.9726163040951642, 'test_cal_ece': 0.0048446612503721806}
+[03:29:59] === XONG nhiều fold: kiểm tra split, huấn luyện F01, test một lượt (24.5 phút)
+[03:29:59] === BẮT ĐẦU nhiều fold: eval.py score cho từng fold
+### F01f1 (1 seed: [0]; 3503 ảnh)
+
+> CẢNH BÁO: chỉ có 1 seed, yêu cầu tối thiểu 3.
+
+| Chỉ số | mean ± std |
+|---|---|
+| top-1 accuracy | 0.9800 (1 seed) |
+| macro-F1 | 0.9747 (1 seed) |
+| balanced accuracy | 0.9727 (1 seed) |
+| ECE (15 bin) | 0.0057 (1 seed) |
+| NLL | 0.0725 (1 seed) |
+
+| Lớp | Precision | Recall | F1 | Số ảnh |
+|---|---|---|---|---|
+| Chinee apple | 0.977 (1 seed) | 0.924 (1 seed) | 0.950 (1 seed) | 225 |
+| Lantana | 0.977 (1 seed) | 0.986 (1 seed) | 0.981 (1 seed) | 213 |
+| Parkinsonia | 0.990 (1 seed) | 0.971 (1 seed) | 0.980 (1 seed) | 206 |
+| Parthenium | 0.971 (1 seed) | 0.995 (1 seed) | 0.983 (1 seed) | 205 |
+| Prickly acacia | 0.967 (1 seed) | 0.967 (1 seed) | 0.967 (1 seed) | 213 |
+| Rubber vine | 0.995 (1 seed) | 0.965 (1 seed) | 0.980 (1 seed) | 202 |
+| Siam weed | 0.977 (1 seed) | 0.991 (1 seed) | 0.984 (1 seed) | 215 |
+| Snake weed | 0.956 (1 seed) | 0.966 ( 
+### F01f1uncal (1 seed: [0]; 3503 ảnh)
+
+> CẢNH BÁO: chỉ có 1 seed, yêu cầu tối thiểu 3.
+
+| Chỉ số | mean ± std |
+|---|---|
+| top-1 accuracy | 0.9800 (1 seed) |
+| macro-F1 | 0.9747 (1 seed) |
+| balanced accuracy | 0.9727 (1 seed) |
+| ECE (15 bin) | 0.0082 (1 seed) |
+| NLL | 0.0815 (1 seed) |
+
+| Lớp | Precision | Recall | F1 | Số ảnh |
+|---|---|---|---|---|
+| Chinee apple | 0.977 (1 seed) | 0.924 (1 seed) | 0.950 (1 seed) | 225 |
+| Lantana | 0.977 (1 seed) | 0.986 (1 seed) | 0.981 (1 seed) | 213 |
+| Parkinsonia | 0.990 (1 seed) | 0.971 (1 seed) | 0.980 (1 seed) | 206 |
+| Parthenium | 0.971 (1 seed) | 0.995 (1 seed) | 0.983 (1 seed) | 205 |
+| Prickly acacia | 0.967 (1 seed) | 0.967 (1 seed) | 0.967 (1 seed) | 213 |
+| Rubber vine | 0.995 (1 seed) | 0.965 (1 seed) | 0.980 (1 seed) | 202 |
+| Siam weed | 0.977 (1 seed) | 0.991 (1 seed) | 0.984 (1 seed) | 215 |
+| Snake weed | 0.956 (1 seed) | 0. 
+### F01f2 (1 seed: [0]; 3501 ảnh)
+
+> CẢNH BÁO: chỉ có 1 seed, yêu cầu tối thiểu 3.
+
+| Chỉ số | mean ± std |
+|---|---|
+| top-1 accuracy | 0.9783 (1 seed) |
+| macro-F1 | 0.9726 (1 seed) |
+| balanced accuracy | 0.9722 (1 seed) |
+| ECE (15 bin) | 0.0048 (1 seed) |
+| NLL | 0.0726 (1 seed) |
+
+| Lớp | Precision | Recall | F1 | Số ảnh |
+|---|---|---|---|---|
+| Chinee apple | 0.930 (1 seed) | 0.942 (1 seed) | 0.936 (1 seed) | 225 |
+| Lantana | 0.976 (1 seed) | 0.972 (1 seed) | 0.974 (1 seed) | 213 |
+| Parkinsonia | 0.995 (1 seed) | 0.985 (1 seed) | 0.990 (1 seed) | 206 |
+| Parthenium | 1.000 (1 seed) | 0.980 (1 seed) | 0.990 (1 seed) | 204 |
+| Prickly acacia | 0.967 (1 seed) | 0.972 (1 seed) | 0.969 (1 seed) | 212 |
+| Rubber vine | 1.000 (1 seed) | 0.985 (1 seed) | 0.993 (1 seed) | 202 |
+| Siam weed | 0.986 (1 seed) | 0.981 (1 seed) | 0.984 (1 seed) | 215 |
+| Snake weed | 0.919 (1 seed) | 0.946 ( 
+### F01f2uncal (1 seed: [0]; 3501 ảnh)
+
+> CẢNH BÁO: chỉ có 1 seed, yêu cầu tối thiểu 3.
+
+| Chỉ số | mean ± std |
+|---|---|
+| top-1 accuracy | 0.9786 (1 seed) |
+| macro-F1 | 0.9729 (1 seed) |
+| balanced accuracy | 0.9727 (1 seed) |
+| ECE (15 bin) | 0.0109 (1 seed) |
+| NLL | 0.0826 (1 seed) |
+
+| Lớp | Precision | Recall | F1 | Số ảnh |
+|---|---|---|---|---|
+| Chinee apple | 0.930 (1 seed) | 0.942 (1 seed) | 0.936 (1 seed) | 225 |
+| Lantana | 0.976 (1 seed) | 0.972 (1 seed) | 0.974 (1 seed) | 213 |
+| Parkinsonia | 0.995 (1 seed) | 0.985 (1 seed) | 0.990 (1 seed) | 206 |
+| Parthenium | 1.000 (1 seed) | 0.980 (1 seed) | 0.990 (1 seed) | 204 |
+| Prickly acacia | 0.967 (1 seed) | 0.972 (1 seed) | 0.969 (1 seed) | 212 |
+| Rubber vine | 1.000 (1 seed) | 0.985 (1 seed) | 0.993 (1 seed) | 202 |
+| Siam weed | 0.986 (1 seed) | 0.981 (1 seed) | 0.984 (1 seed) | 215 |
+| Snake weed | 0.919 (1 seed) | 0. 
+[03:30:02] === XONG nhiều fold: eval.py score cho từng fold (0.0 phút)
+[03:30:02] === BẮT ĐẦU Dọn dẹp
+đã xoá checkpoint: 223 MB | tổng thời gian 0.46 giờ
+[03:30:02] HOÀN TẤT sau 0.46 giờ
+[03:30:02] === XONG Dọn dẹp (0.0 phút)
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 118034 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Writing 422985 bytes to __results__.html

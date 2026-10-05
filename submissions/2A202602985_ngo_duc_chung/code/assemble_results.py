@@ -165,6 +165,18 @@ def main():
         bonus["Bonus_DINOv2"] = pd.read_csv(TAB / "bonus_dino_runs.csv")[["exp_id", "backbone", "pretrained_tag", "init", "params_m", "val_macro_f1", "val_top1", "val_ece", "best_epoch", "sec_per_epoch"]]
         bonus["Bonus_Shift"] = pd.read_csv(TAB / "bonus_shift.csv")
         bonus["Bonus_ONNX"] = pd.read_csv(TAB / "bonus_onnx.csv")
+    # nhiều fold (điểm thưởng): cấu hình cuối F01, seed 0, test của từng fold chạy một lượt; fold 0 lấy từ F01_seed0_test.csv
+    fold_files = {0: PRED / "F01_seed0_test.csv", 1: PRED / "F01f1_seed0_test.csv", 2: PRED / "F01f2_seed0_test.csv"}
+    if all(f.exists() for f in fold_files.values()):
+        fr = []
+        for k, f in fold_files.items():
+            pr = ev.read_pred(str(f)); m = ev.compute_metrics(pr.y_true, pr.y_pred, pr.probs)
+            fr.append({"fold": k, "file": f.name, "n_test": m["n"], "top1_test": m["top1"], "macro_f1_test": m["macro_f1"], "balanced_acc": m["balanced_acc"],
+                       "ece_test": m["ece"], "recall_Chinee_apple": float(m["recall"][0]), "recall_Snake_weed": float(m["recall"][7])})
+        ft = pd.DataFrame(fr); num = ["top1_test", "macro_f1_test", "balanced_acc", "ece_test", "recall_Chinee_apple", "recall_Snake_weed"]
+        summ = {"fold": "mean ± std (3 fold, ddof=1)", "file": "", "n_test": ""}
+        for c in num: summ[c] = f"{ft[c].mean():.4f} ± {ft[c].std(ddof=1):.4f}"
+        bonus["Bonus_Folds"] = pd.concat([ft, pd.DataFrame([summ])], ignore_index=True)
 
     sheets = {"Backbones": bbt, "Training": train_t, "Inference": inf_t, "Final": final_t, "PerClass": perclass_t, "Latency": lat_t,
               "Summary": top, "Lab2_Slide": lab2, **bonus}

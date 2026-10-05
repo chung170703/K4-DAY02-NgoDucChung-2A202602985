@@ -1,0 +1,16 @@
+[03:05:31] bắt đầu | nền tảng=Kaggle | Drive backup=None | workers=4 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[03:05:31] === BẮT ĐẦU nhiều fold: kiểm tra split, huấn luyện F01, test một lượt
+[03:05:31] === BẮT ĐẦU F01 fold1 train
+[03:15:25] === XONG F01 fold1 train (9.9 phút)
+[03:15:25] === BẮT ĐẦU F01 fold1 final_predict
+[03:18:01] === XONG F01 fold1 final_predict (2.6 phút)
+[03:18:01] === BẮT ĐẦU F01 fold2 train
+[03:27:28] === XONG F01 fold2 train (9.5 phút)
+[03:27:28] === BẮT ĐẦU F01 fold2 final_predict
+[03:29:59] === XONG F01 fold2 final_predict (2.5 phút)
+[03:29:59] === XONG nhiều fold: kiểm tra split, huấn luyện F01, test một lượt (24.5 phút)
+[03:29:59] === BẮT ĐẦU nhiều fold: eval.py score cho từng fold
+[03:30:02] === XONG nhiều fold: eval.py score cho từng fold (0.0 phút)
+[03:30:02] === BẮT ĐẦU Dọn dẹp
+[03:30:02] HOÀN TẤT sau 0.46 giờ
+[03:30:02] === XONG Dọn dẹp (0.0 phút)

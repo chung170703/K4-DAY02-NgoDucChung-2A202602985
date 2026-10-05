@@ -10,7 +10,7 @@ Ngô Đức Chung · 2A202602985 · Track 4 · Ngày 2. Mọi số liệu lấy 
 - **Kết quả test (mean ± std, 3 seed):** top-1 **97,91 ± 0,29%**, macro-F1 **0,9738 ± 0,0035**, ECE 0,0057 ± 0,0011; recall Chinee apple 95,3 ± 1,4%, Snake weed 94,9 ± 1,0%. Độ trễ p95 batch-1 là 31,8 ms (T4).
 - **So với mốc** (`T00` + 1 view, 3 seed): macro-F1 0,9710 ± 0,0048, top-1 97,66 ± 0,38%. Chênh macro-F1 là +0,0027, **nhỏ hơn độ lệch chuẩn giữa các seed (0,0048), nên không phân biệt được** F01 với mốc.
 - **Kết luận chính:** yếu tố quyết định là **chọn backbone/trọng số tiền huấn luyện** (ConvNeXt, Swin, DeiT đạt macro-F1 val ≥ 0,958 còn các CNN còn lại 0,83–0,86); mọi yếu tố công thức và suy luận chỉ thay đổi trong cỡ nhiễu giữa các lần chạy (~0,003–0,01).
-- **Bài làm thêm (chỉ val):** DINOv2 linear probe (0,874 so với 0,971 khi tinh chỉnh), lệch phân phối (làm mờ phá hủy mô hình: macro-F1 0,35), Grad-CAM cho ca bị nhầm, ONNX (nhanh hơn PyTorch ≈1,23× trên CPU) — mục 9.
+- **Bài làm thêm (chỉ val):** DINOv2 linear probe (0,874 so với 0,971 khi tinh chỉnh), lệch phân phối (làm mờ phá hủy mô hình: macro-F1 0,35), Grad-CAM cho ca bị nhầm, ONNX (nhanh hơn PyTorch ≈1,23× trên CPU), và cấu hình cuối trên 3 fold (top-1 0,9781 ± 0,0020, macro-F1 0,9724 ± 0,0024) — mục 9.
 - **Điều cần biết (trung thực):** máy ảo Colab bị thu hồi giữa chừng nên một phần ablation phải chạy lại trên Kaggle (mục 2.3). Số liệu của các lần chạy đã mất log được ghi riêng ở Phụ lục B và không dùng để kết luận.
 
 ## 2. Dữ liệu và thiết lập
@@ -194,9 +194,22 @@ Batch 1, ảnh 224, FP32, 4 CPU của Kaggle, warmup 10, 100 lần đo, không t
 
 ONNX Runtime nhanh hơn ≈ 1,23× theo p50 (≈ 1,26× theo p95), sai số logit lớn nhất so với PyTorch 9,5e-7. Chỉ so trên CPU (không cài `onnxruntime-gpu`), nên không so được với độ trễ GPU 6,3 ms ở mục 5. File `.onnx` (111 MB) không nộp.
 
+### 9.5 Nhiều fold: cấu hình cuối trên fold 0, 1, 2 (`Bonus_Folds`, `eval_results/F01f*`)
+
+Cấu hình cuối F01 (ConvNeXt-tiny + T00 + EMA 0,99, TTA 5 crop, gộp xác suất, temperature scaling khớp trên **val của từng fold**) được chạy lại ở lượt 5 (Kaggle, `code/lab_day2_folds.ipynb`) trên fold 1 và fold 2, mỗi fold dùng đủ bộ ba file CSV nguyên bản của tác giả (`tables/split_check_fold*.json`: giao rỗng, hợp 17.509 ảnh), seed 0, test của mỗi fold chạy **một lần**. Không chọn lại cấu hình theo fold. Fold 0 lấy từ `F01_seed0_test.csv` để cùng seed 0.
+
+| fold | n test | top-1 | macro-F1 | ECE | recall Chinee apple | recall Snake weed |
+|---|---|---|---|---|---|---|
+| 0 (seed 0) | 3.507 | 0,9760 | 0,9699 | 0,0068 | 0,956 | 0,941 |
+| 1 | 3.503 | 0,9800 | 0,9747 | 0,0057 | 0,924 | 0,966 |
+| 2 | 3.501 | 0,9783 | 0,9726 | 0,0048 | 0,942 | 0,946 |
+| **mean ± std (3 fold)** | | **0,9781 ± 0,0020** | **0,9724 ± 0,0024** | 0,0058 ± 0,0010 | 0,941 ± 0,016 | 0,951 ± 0,013 |
+
+Chênh giữa các fold (std macro-F1 0,0024) cùng cỡ chênh giữa các seed trong một fold (0,0035 ở fold 0), nên kết quả chung kết không phụ thuộc đặc biệt vào cách chia của fold 0. Mean 3 fold của seed 0 (0,9724) thấp hơn mean 3 seed của fold 0 (0,9738) vì seed 0 ở fold 0 là seed thấp nhất (0,9699); chênh lệch này nằm trong nhiễu. Recall hai lớp khó dao động nhiều hơn (Chinee apple 0,924–0,956 giữa các fold) vì chỉ có ≈ 225 ảnh mỗi lớp. Giới hạn: mỗi fold chỉ 1 seed; fold 3 và 4 chưa chạy; vẫn là chia ngẫu nhiên không theo địa điểm.
+
 ## Phụ lục A. Danh sách exp_id
 
-`B01–B07` backbone (lượt 1, Colab; `B03/B04/B05` còn chạy lại ở lượt 2 để làm ensemble) · `T00` mốc (3 seed, mỗi lượt một bộ) · `T01` từ đầu · `T02` đóng băng · `T03` hình học · `T04` đổi màu · `T08` CutMix · `T09` label smoothing · `T10` focal · `T11` CE trọng số · `T12` sampler cân bằng · `T14` LR cao · `T17` 20 epoch · `T19` từ đầu + CutMix · `T20` đóng băng + CutMix · `T21` tổ hợp CE trọng số + CutMix + EMA (lượt 3, chỉ val) · `BON_F01` (ConvNeXt-tiny + EMA, seed 0, cho mục 9) · `BON_DINO` (linear probe DINOv2) · `F01` chung kết (EMA; 3 seed) · `F01uncal` bản chưa hiệu chuẩn · `I00–I08` suy luận. Cấu hình đầy đủ ở `run_logs*/<exp_id>/seed<k>/config.json`; đường cong ở `curves/<exp_id>_*.png`; notebook ở `code/lab_day2_kaggle.ipynb` (lượt 1), `code/lab_day2_recovery.ipynb` (lượt 2) `code/lab_day2_combo.ipynb` (lượt 3, T21) và `code/lab_day2_bonus.ipynb` (lượt 4, mục 9).
+`B01–B07` backbone (lượt 1, Colab; `B03/B04/B05` còn chạy lại ở lượt 2 để làm ensemble) · `T00` mốc (3 seed, mỗi lượt một bộ) · `T01` từ đầu · `T02` đóng băng · `T03` hình học · `T04` đổi màu · `T08` CutMix · `T09` label smoothing · `T10` focal · `T11` CE trọng số · `T12` sampler cân bằng · `T14` LR cao · `T17` 20 epoch · `T19` từ đầu + CutMix · `T20` đóng băng + CutMix · `T21` tổ hợp CE trọng số + CutMix + EMA (lượt 3, chỉ val) · `F01f1`, `F01f2` (cấu hình cuối trên fold 1, 2) · `BON_F01` (ConvNeXt-tiny + EMA, seed 0, cho mục 9) · `BON_DINO` (linear probe DINOv2) · `F01` chung kết (EMA; 3 seed) · `F01uncal` bản chưa hiệu chuẩn · `I00–I08` suy luận. Cấu hình đầy đủ ở `run_logs*/<exp_id>/seed<k>/config.json`; đường cong ở `curves/<exp_id>_*.png`; notebook ở `code/lab_day2_kaggle.ipynb` (lượt 1), `code/lab_day2_recovery.ipynb` (lượt 2) `code/lab_day2_combo.ipynb` (lượt 3, T21) và `code/lab_day2_bonus.ipynb` (lượt 4, mục 9.1–9.4) và `code/lab_day2_folds.ipynb` (lượt 5, mục 9.5).
 
 ## Phụ lục B. Số liệu lượt 1 đã mất log (không dùng để kết luận)
 
