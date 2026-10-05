@@ -1,0 +1,17 @@
+{
+  "exp_id": "F01",
+  "seed": 1,
+  "tta": "crop5",
+  "space": "prob",
+  "T": 1.496364428200513,
+  "n_views": 5,
+  "val_T_fit_on": "val",
+  "val_uncal_macro_f1": 0.9714650809628415,
+  "val_uncal_ece": 0.009029723317232409,
+  "val_cal_macro_f1": 0.9714650809628415,
+  "val_cal_ece": 0.004411163708101856,
+  "test_uncal_macro_f1": 0.9742431227972281,
+  "test_uncal_ece": 0.010268292388955734,
+  "test_cal_macro_f1": 0.9747808352626018,
+  "test_cal_ece": 0.004700107812510701
+}

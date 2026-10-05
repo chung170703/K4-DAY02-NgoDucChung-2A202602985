@@ -1,0 +1,16 @@
+{
+  "exp_id": "T00",
+  "seed": 1,
+  "backbone": "convnext_tiny",
+  "init": "finetune",
+  "pretrained_tag": "in12k_ft_in1k",
+  "best_epoch": 10,
+  "val_macro_f1": 0.9691605378915096,
+  "val_top1": 0.9762924878606113,
+  "val_loss": 0.09267283894836699,
+  "val_ece": 0.01207700323693351,
+  "sec_per_epoch": 54.00139160100025,
+  "params_m": 27.827049,
+  "gmacs": 4.454770176,
+  "epochs": 10
+}

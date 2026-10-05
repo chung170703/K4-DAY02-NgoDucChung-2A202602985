@@ -1,0 +1,116 @@
+[13:45:22] bắt đầu | nền tảng=Colab | Drive backup=/content/drive/MyDrive/K4_Day2_DeepWeeds_out | workers=2 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[13:45:22] === BẮT ĐẦU unit test
+[13:47:31] === XONG unit test (2.2 phút)
+[13:47:31] === BẮT ĐẦU Bước 0: kiểm tra split
+[13:47:31] === XONG Bước 0: kiểm tra split (0.0 phút)
+[13:47:31] === BẮT ĐẦU Bước 0: EDA
+[13:47:33] === XONG Bước 0: EDA (0.0 phút)
+[13:47:33] === BẮT ĐẦU Bước 0: kiểm tra pipeline
+[13:47:49] === XONG Bước 0: kiểm tra pipeline (0.3 phút)
+[13:47:49] === BẮT ĐẦU Bước 1: huấn luyện backbone
+[13:47:49] === BẮT ĐẦU train B01 {'backbone': 'resnet50', 'seed': 0}
+[13:56:38] === XONG train B01 {'backbone': 'resnet50', 'seed': 0} (8.8 phút)
+[13:56:38] === BẮT ĐẦU train B02 {'backbone': 'resnext50_32x4d', 'seed': 0}
+[14:00:35] bắt đầu | nền tảng=Colab | Drive backup=/content/drive/MyDrive/K4_Day2_DeepWeeds_out | workers=2 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[14:00:35] === BẮT ĐẦU unit test
+[14:02:43] === XONG unit test (2.1 phút)
+[14:02:43] === BẮT ĐẦU Bước 0: kiểm tra split
+[14:02:43] === XONG Bước 0: kiểm tra split (0.0 phút)
+[14:02:43] === BẮT ĐẦU Bước 0: EDA
+[14:02:45] === XONG Bước 0: EDA (0.0 phút)
+[14:02:45] === BẮT ĐẦU Bước 0: kiểm tra pipeline
+[14:03:01] === XONG Bước 0: kiểm tra pipeline (0.3 phút)
+[14:03:01] === BẮT ĐẦU Bước 1: huấn luyện backbone
+[14:03:01] === BẮT ĐẦU train B01 {'backbone': 'resnet50', 'seed': 0}
+[14:03:01] === XONG train B01 {'backbone': 'resnet50', 'seed': 0} (0.0 phút)
+[14:03:01] === BẮT ĐẦU train B02 {'backbone': 'resnext50_32x4d', 'seed': 0}
+[14:12:24] === XONG train B02 {'backbone': 'resnext50_32x4d', 'seed': 0} (9.4 phút)
+[14:12:24] === BẮT ĐẦU train B03 {'backbone': 'convnext_tiny', 'seed': 0}
+[14:18:54] bắt đầu | nền tảng=Colab | Drive backup=/content/drive/MyDrive/K4_Day2_DeepWeeds_out | workers=2 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[14:18:54] === BẮT ĐẦU unit test
+[14:18:54] === LỖI unit test sau 0.0 phút
+Traceback (most recent call last):
+  File "/content/work/submissions/2A202602985_ngo_duc_chung/code/kaggle_run.py", line 97, in guard
+    yield
+  File "/content/launch/lab_run.py", line 100, in <module>
+    if os.environ.get("LAB_SKIP_TESTS") == "1": raise RuntimeError("bỏ qua unit test ở lần khởi động lại (đã chạy ở lần khởi động đầu, xem log)")
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: bỏ qua unit test ở lần khởi động lại (đã chạy ở lần khởi động đầu, xem log)
+
+[14:18:54] === BẮT ĐẦU Bước 0: kiểm tra split
+[14:18:54] === XONG Bước 0: kiểm tra split (0.0 phút)
+[14:18:54] === BẮT ĐẦU Bước 0: EDA
+[14:18:56] === XONG Bước 0: EDA (0.0 phút)
+[14:18:56] === BẮT ĐẦU Bước 0: kiểm tra pipeline
+[14:19:12] === XONG Bước 0: kiểm tra pipeline (0.3 phút)
+[14:19:12] === BẮT ĐẦU Bước 1: huấn luyện backbone
+[14:19:12] === BẮT ĐẦU train B01 {'backbone': 'resnet50', 'seed': 0}
+[14:19:12] === XONG train B01 {'backbone': 'resnet50', 'seed': 0} (0.0 phút)
+[14:19:12] === BẮT ĐẦU train B02 {'backbone': 'resnext50_32x4d', 'seed': 0}
+[14:19:12] === XONG train B02 {'backbone': 'resnext50_32x4d', 'seed': 0} (0.0 phút)
+[14:19:12] === BẮT ĐẦU train B03 {'backbone': 'convnext_tiny', 'seed': 0}
+[14:26:50] === XONG train B03 {'backbone': 'convnext_tiny', 'seed': 0} (7.6 phút)
+[14:26:50] === BẮT ĐẦU train B04 {'backbone': 'deit_small_patch16_224', 'seed': 0}
+[14:35:51] === XONG train B04 {'backbone': 'deit_small_patch16_224', 'seed': 0} (9.0 phút)
+[14:35:51] === BẮT ĐẦU train B05 {'backbone': 'swin_tiny_patch4_window7_224', 'seed': 0}
+[14:51:19] === XONG train B05 {'backbone': 'swin_tiny_patch4_window7_224', 'seed': 0} (15.5 phút)
+[14:51:19] === BẮT ĐẦU train B06 {'backbone': 'efficientnet_b0', 'seed': 0}
+[14:58:25] === XONG train B06 {'backbone': 'efficientnet_b0', 'seed': 0} (7.1 phút)
+[14:58:25] === BẮT ĐẦU train B07 {'backbone': 'mobilenetv3_large_100', 'seed': 0}
+[15:04:46] === XONG train B07 {'backbone': 'mobilenetv3_large_100', 'seed': 0} (6.3 phút)
+[15:04:46] === XONG Bước 1: huấn luyện backbone (45.6 phút)
+[15:04:46] === BẮT ĐẦU Bước 1: độ trễ backbone
+[15:07:24] === XONG Bước 1: độ trễ backbone (2.6 phút)
+[15:07:24] === BẮT ĐẦU Bước 2: T00 x3 và ablation
+[15:07:24] === BẮT ĐẦU train T00 {'backbone': 'convnext_tiny', 'seed': 0}
+[15:21:15] === XONG train T00 {'backbone': 'convnext_tiny', 'seed': 0} (13.8 phút)
+[15:21:15] === BẮT ĐẦU train T00 {'backbone': 'convnext_tiny', 'seed': 1}
+[15:28:22] bắt đầu | nền tảng=Colab | Drive backup=/content/drive/MyDrive/K4_Day2_DeepWeeds_out | workers=2 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[15:28:22] === BẮT ĐẦU unit test
+[15:28:22] === LỖI unit test sau 0.0 phút
+Traceback (most recent call last):
+  File "/content/work/submissions/2A202602985_ngo_duc_chung/code/kaggle_run.py", line 95, in guard
+    yield
+  File "/content/launch/lab_run.py", line 100, in <module>
+    if os.environ.get("LAB_SKIP_TESTS") == "1": raise RuntimeError("bỏ qua unit test ở lần khởi động lại (đã chạy ở lần khởi động đầu, xem log)")
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: bỏ qua unit test ở lần khởi động lại (đã chạy ở lần khởi động đầu, xem log)
+
+[15:28:22] === BẮT ĐẦU Bước 0: kiểm tra split
+[15:28:23] === XONG Bước 0: kiểm tra split (0.0 phút)
+[15:28:23] === BẮT ĐẦU Bước 0: EDA
+[15:28:24] === XONG Bước 0: EDA (0.0 phút)
+[15:28:24] === BẮT ĐẦU Bước 0: kiểm tra pipeline
+[15:28:40] === XONG Bước 0: kiểm tra pipeline (0.3 phút)
+[15:28:40] === BẮT ĐẦU Bước 1: huấn luyện backbone
+[15:28:40] === BẮT ĐẦU train B01 {'backbone': 'resnet50', 'seed': 0}
+[15:28:40] === XONG train B01 {'backbone': 'resnet50', 'seed': 0} (0.0 phút)
+[15:28:40] === BẮT ĐẦU train B02 {'backbone': 'resnext50_32x4d', 'seed': 0}
+[15:28:40] === XONG train B02 {'backbone': 'resnext50_32x4d', 'seed': 0} (0.0 phút)
+[15:28:40] === BẮT ĐẦU train B03 {'backbone': 'convnext_tiny', 'seed': 0}
+[15:28:40] === XONG train B03 {'backbone': 'convnext_tiny', 'seed': 0} (0.0 phút)
+[15:28:40] === BẮT ĐẦU train B04 {'backbone': 'deit_small_patch16_224', 'seed': 0}
+[15:28:40] === XONG train B04 {'backbone': 'deit_small_patch16_224', 'seed': 0} (0.0 phút)
+[15:28:40] === BẮT ĐẦU train B05 {'backbone': 'swin_tiny_patch4_window7_224', 'seed': 0}
+[15:28:40] === XONG train B05 {'backbone': 'swin_tiny_patch4_window7_224', 'seed': 0} (0.0 phút)
+[15:28:40] === BẮT ĐẦU train B06 {'backbone': 'efficientnet_b0', 'seed': 0}
+[15:28:40] === XONG train B06 {'backbone': 'efficientnet_b0', 'seed': 0} (0.0 phút)
+[15:28:40] === BẮT ĐẦU train B07 {'backbone': 'mobilenetv3_large_100', 'seed': 0}
+[15:28:40] === XONG train B07 {'backbone': 'mobilenetv3_large_100', 'seed': 0} (0.0 phút)
+[15:28:40] === XONG Bước 1: huấn luyện backbone (0.0 phút)
+[15:28:40] === BẮT ĐẦU Bước 1: độ trễ backbone
+[15:31:19] === XONG Bước 1: độ trễ backbone (2.7 phút)
+[15:31:19] === BẮT ĐẦU Bước 2: T00 x3 và ablation
+[15:31:19] === BẮT ĐẦU train T00 {'backbone': 'convnext_tiny', 'seed': 0}
+[15:31:19] === XONG train T00 {'backbone': 'convnext_tiny', 'seed': 0} (0.0 phút)
+[15:31:19] === BẮT ĐẦU train T00 {'backbone': 'convnext_tiny', 'seed': 1}
+[15:39:11] === XONG train T00 {'backbone': 'convnext_tiny', 'seed': 1} (7.9 phút)
+[15:39:11] === BẮT ĐẦU train T00 {'backbone': 'convnext_tiny', 'seed': 2}
+[15:51:54] === XONG train T00 {'backbone': 'convnext_tiny', 'seed': 2} (12.7 phút)
+[15:51:54] === BẮT ĐẦU train T14 {'backbone': 'convnext_tiny', 'seed': 0, 'lr_backbone': 0.0003, 'lr_head': 0.003}
+[16:04:15] === XONG train T14 {'backbone': 'convnext_tiny', 'seed': 0, 'lr_backbone': 0.0003, 'lr_head': 0.003} (12.4 phút)
+[16:04:15] === BẮT ĐẦU train T09 {'backbone': 'convnext_tiny', 'seed': 0, 'loss': 'ls', 'label_smoothing': 0.1}
+[16:17:01] === XONG train T09 {'backbone': 'convnext_tiny', 'seed': 0, 'loss': 'ls', 'label_smoothing': 0.1} (12.8 phút)
+[16:17:01] === BẮT ĐẦU train T03 {'backbone': 'convnext_tiny', 'seed': 0, 'aug': 'geo'}
+[16:29:25] === XONG train T03 {'backbone': 'convnext_tiny', 'seed': 0, 'aug': 'geo'} (12.4 phút)
+[16:29:25] === BẮT ĐẦU train T04 {'backbone': 'convnext_tiny', 'seed': 0, 'aug': 'color'}

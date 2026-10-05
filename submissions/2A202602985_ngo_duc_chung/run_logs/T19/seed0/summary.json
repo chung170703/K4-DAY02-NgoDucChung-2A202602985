@@ -1,0 +1,16 @@
+{
+  "exp_id": "T19",
+  "seed": 0,
+  "backbone": "convnext_tiny",
+  "init": "scratch",
+  "pretrained_tag": "none",
+  "best_epoch": 9,
+  "val_macro_f1": 0.24083475872085647,
+  "val_top1": 0.5632676378177663,
+  "val_loss": 1.3476226176578159,
+  "val_ece": 0.0436988148495306,
+  "sec_per_epoch": 52.926423043299835,
+  "params_m": 27.827049,
+  "gmacs": 4.454770176,
+  "epochs": 10
+}

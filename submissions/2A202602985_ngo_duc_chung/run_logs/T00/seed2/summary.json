@@ -1,0 +1,19 @@
+{
+  "exp_id": "T00",
+  "seed": 2,
+  "backbone": "convnext_tiny",
+  "init": "finetune",
+  "pretrained_tag": "in12k_ft_in1k",
+  "best_epoch": 9,
+  "val_macro_f1": 0.9743106027915371,
+  "val_top1": 0.9808626106826621,
+  "val_loss": 0.08596748109961179,
+  "val_ece": 0.01083366060999432,
+  "sec_per_epoch": 52.02676294750008,
+  "params_m": 27.827049,
+  "gmacs": 4.454770176,
+  "epochs": 10,
+  "test_macro_f1": 0.9719503830491981,
+  "test_top1": 0.9777587681779298,
+  "test_ece": 0.012725109377966573
+}

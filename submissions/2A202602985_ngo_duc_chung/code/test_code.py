@@ -13,6 +13,8 @@ import torch
 import torch.nn.functional as F
 from PIL import Image
 
+import os
+os.environ["LAB_DEVICE"] = "cpu"   # test CPU ổn định, không rơi sang MPS/CUDA
 import benchmark as B
 import checks
 import dataset as D
@@ -459,6 +461,38 @@ class TestSync(unittest.TestCase):
             self.assertFalse(r["pushed"])
             self.assertIsNotNone(r["error"])
             self.assertTrue((sub / "curves").is_symlink())
+
+
+    def test_sync_unstaged_changes_and_leftover_commits(self):
+        with tempfile.TemporaryDirectory() as d:
+            d = Path(d)
+            self.sh("git", "init", "-q", "--bare", "-b", "main", str(d / "remote.git"))
+            repo = d / "repo"
+            self.sh("git", "clone", "-q", str(d / "remote.git"), str(repo))
+            self.sh("git", "config", "user.email", "t@t", cwd=repo)
+            self.sh("git", "config", "user.name", "t", cwd=repo)
+            (repo / ".gitignore").write_text("a\n")
+            self.sh("git", "add", "-A", cwd=repo)
+            self.sh("git", "commit", "-qm", "init", cwd=repo)
+            self.sh("git", "push", "-q", "origin", "HEAD:main", cwd=repo)
+            sub = repo / "sub"
+            sub.mkdir()
+            drv = d / "drv" / "curves"
+            drv.mkdir(parents=True)
+            (sub / "curves").symlink_to(drv)
+            (drv / "x.png").write_bytes(b"1")
+            (repo / ".gitignore").write_text("a\nckpt/\n")       # thay đổi CHƯA stage (như trên Colab)
+            good = str(d / "remote.git")
+            self.sh("git", "remote", "set-url", "origin", str(d / "nope.git"), cwd=repo)
+            r1 = SY.sync_to_repo(repo, sub, "one")                  # push lỗi: commit còn tồn
+            self.assertTrue(r1["committed"] and not r1["pushed"])
+            self.sh("git", "remote", "set-url", "origin", good, cwd=repo)
+            r2 = SY.sync_to_repo(repo, sub, "two")                  # không có file mới, nhưng phải đẩy commit tồn
+            self.assertFalse(r2["committed"])
+            self.assertTrue(r2["pushed"], r2)
+            files = self.sh("git", "--git-dir", good, "ls-tree", "-r", "--name-only", "main").split()
+            self.assertIn("sub/curves/x.png", files)
+            self.assertIn("ckpt/", (repo / ".gitignore").read_text())   # thay đổi chưa stage vẫn còn nguyên
 
 
 class TestReportFigs(unittest.TestCase):

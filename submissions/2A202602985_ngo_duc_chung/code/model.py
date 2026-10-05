@@ -25,6 +25,27 @@ SUGGESTED_BACKBONES = {
 }
 
 
+def get_device():
+    """cuda nếu có, rồi mps (GPU của Mac Apple Silicon), cuối cùng cpu. Biến môi trường LAB_DEVICE=cpu|mps|cuda ép thiết bị."""
+    import os
+    forced = os.environ.get("LAB_DEVICE")
+    if forced:
+        return torch.device(forced)
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if getattr(torch.backends, "mps", None) is not None and torch.backends.mps.is_available():
+        return torch.device("mps")
+    return torch.device("cpu")
+
+
+def sync_device(device) -> None:
+    """Đợi GPU làm xong (cần trước/sau khi đo thời gian). Không làm gì trên cpu."""
+    if device.type == "cuda":
+        torch.cuda.synchronize()
+    elif device.type == "mps":
+        torch.mps.synchronize()
+
+
 def build_model(name: str, pretrained: bool = True, num_classes: int = 9,
                 drop_rate: float = 0.0, init: str = "finetune"):
     """Tạo model phân loại 9 lớp.

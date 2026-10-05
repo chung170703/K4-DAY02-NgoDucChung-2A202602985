@@ -299,7 +299,7 @@ def _save_ckpt(path: Path, obj: dict) -> None:
 
 def load_best(cfg: Config, device=None):
     """Dựng lại model và nạp best.pt của một lần chạy (dùng cho Bước 3: suy luận, ensemble)."""
-    device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = device or M.get_device()
     model = M.build_model(cfg.backbone, pretrained=False, drop_rate=cfg.drop_rate, init="finetune")
     ck = torch.load(run_dir(cfg) / "best.pt", map_location="cpu")
     model.load_state_dict(ck["model"])
@@ -321,7 +321,8 @@ def run(cfg: Config) -> dict:
     set_seed(cfg.seed)
     rd.mkdir(parents=True, exist_ok=True)
     (rd / "config.json").write_text(json.dumps(dataclasses.asdict(cfg), indent=2, ensure_ascii=False))
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = M.get_device()
+    print(f"[{cfg.exp_id} seed{cfg.seed}] thiết bị: {device} | AMP: {cfg.amp and device.type == 'cuda'}")
 
     train_df, val_df, test_df = D.load_split(cfg.labels_dir, cfg.fold)
     D.check_split(train_df, val_df, test_df, cfg.images_dir)
@@ -380,8 +381,7 @@ def run(cfg: Config) -> dict:
         train_loader.generator.manual_seed(cfg.seed * 1000 + epoch)
         t0 = time.perf_counter()
         tr = train_one_epoch(model, train_loader, criterion, optimizer, scheduler, scaler, cfg, device, ema)
-        if device.type == "cuda":
-            torch.cuda.synchronize()
+        M.sync_device(device)
         sec = time.perf_counter() - t0
         t_train += sec
         names, y, logits, vloss = evaluate(eval_model, val_loader, eval_criterion, device, use_amp, cfg.debug_batches)

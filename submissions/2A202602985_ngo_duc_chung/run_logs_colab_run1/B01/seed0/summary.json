@@ -1,0 +1,16 @@
+{
+  "exp_id": "B01",
+  "seed": 0,
+  "backbone": "resnet50",
+  "init": "finetune",
+  "pretrained_tag": "a1_in1k",
+  "best_epoch": 9,
+  "val_macro_f1": 0.8279779692804505,
+  "val_top1": 0.869751499571551,
+  "val_loss": 0.39523415299389436,
+  "val_ece": 0.02066043901890298,
+  "sec_per_epoch": 40.14209981590011,
+  "params_m": 23.526473,
+  "gmacs": 4.087154688,
+  "epochs": 10
+}

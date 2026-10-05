@@ -1,0 +1,106 @@
+[19:24:33] bắt đầu | nền tảng=Kaggle | Drive backup=None | workers=4 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[19:24:33] === BẮT ĐẦU Bước 0: kiểm tra split
+[19:24:33] === XONG Bước 0: kiểm tra split (0.0 phút)
+[19:24:33] PHỤC HỒI: BB=convnext_tiny recipe={'ema_decay': 0.99} seeds=(0, 1, 2)
+[19:24:33] === BẮT ĐẦU F01 seed 0 (chỉ val, không test)
+[19:24:33] === BẮT ĐẦU F01 train seed0
+[19:35:06] === XONG F01 train seed0 (10.6 phút)
+[19:35:06] === XONG F01 seed 0 (chỉ val, không test) (10.6 phút)
+[19:35:06] === BẮT ĐẦU Bước 3: I00-I03
+[19:40:15] === XONG Bước 3: I00-I03 (5.1 phút)
+[19:40:15] === BẮT ĐẦU Bước 3: I04 độ phân giải kiểm tra
+[19:42:08] === XONG Bước 3: I04 độ phân giải kiểm tra (1.9 phút)
+[19:42:08] === BẮT ĐẦU Bước 3: I07 temperature scaling
+[19:42:08] === XONG Bước 3: I07 temperature scaling (0.0 phút)
+[19:42:08] === BẮT ĐẦU Bước 3: I08 gộp BN / FP16 và độ trễ
+[19:43:55] === XONG Bước 3: I08 gộp BN / FP16 và độ trễ (1.8 phút)
+[19:43:55] === BẮT ĐẦU Bước 3: tổng hợp, chọn cách suy luận chung kết
+[19:43:55] suy luận chung kết (val, p95 batch-1 <= 100 ms): I02a tta=crop5 space=prob | p95=31.754189100183794
+[19:43:56] === XONG Bước 3: tổng hợp, chọn cách suy luận chung kết (0.0 phút)
+[19:43:56] === BẮT ĐẦU Bước 4: chung kết
+[19:43:56] === BẮT ĐẦU T00 train+test seed0
+[19:54:23] === XONG T00 train+test seed0 (10.5 phút)
+[19:54:23] === BẮT ĐẦU F01 train seed0
+[19:54:23] === XONG F01 train seed0 (0.0 phút)
+[19:54:23] === BẮT ĐẦU F01 final_predict seed0
+[19:57:20] === XONG F01 final_predict seed0 (3.0 phút)
+[19:57:20] === BẮT ĐẦU T00 train+test seed1
+[20:07:43] === XONG T00 train+test seed1 (10.4 phút)
+[20:07:43] === BẮT ĐẦU F01 train seed1
+[20:18:04] === XONG F01 train seed1 (10.3 phút)
+[20:18:04] === BẮT ĐẦU F01 final_predict seed1
+[20:20:55] === XONG F01 final_predict seed1 (2.9 phút)
+[20:20:55] === BẮT ĐẦU T00 train+test seed2
+[20:31:18] === XONG T00 train+test seed2 (10.4 phút)
+[20:31:18] === BẮT ĐẦU F01 train seed2
+[20:41:37] === XONG F01 train seed2 (10.3 phút)
+[20:41:37] === BẮT ĐẦU F01 final_predict seed2
+[20:44:29] === XONG F01 final_predict seed2 (2.9 phút)
+[20:44:29] === XONG Bước 4: chung kết (60.6 phút)
+[20:44:29] === BẮT ĐẦU Bước 4: eval.py score/grade
+[20:44:32] === XONG Bước 4: eval.py score/grade (0.1 phút)
+[20:44:32] === BẮT ĐẦU Phân tích lỗi
+[20:44:39] === XONG Phân tích lỗi (0.1 phút)
+[20:44:39] === BẮT ĐẦU Ghi kết quả phần bắt buộc (results_recovery.xlsx)
+[20:44:40] === XONG Ghi kết quả phần bắt buộc (results_recovery.xlsx) (0.0 phút)
+[20:44:40] === BẮT ĐẦU Phụ 1: I05 ensemble (huấn luyện lại 3 backbone tốt nhất theo val ở Bước 1)
+[20:44:40] === BẮT ĐẦU train B03 {'backbone': 'convnext_tiny', 'seed': 0}
+[20:54:52] === XONG train B03 {'backbone': 'convnext_tiny', 'seed': 0} (10.2 phút)
+[20:54:52] === BẮT ĐẦU train B05 {'backbone': 'swin_tiny_patch4_window7_224', 'seed': 0}
+[21:08:18] === XONG train B05 {'backbone': 'swin_tiny_patch4_window7_224', 'seed': 0} (13.4 phút)
+[21:08:18] === BẮT ĐẦU train B04 {'backbone': 'deit_small_patch16_224', 'seed': 0}
+[21:15:32] === XONG train B04 {'backbone': 'deit_small_patch16_224', 'seed': 0} (7.2 phút)
+[21:16:25] === XONG Phụ 1: I05 ensemble (huấn luyện lại 3 backbone tốt nhất theo val ở Bước 1) (31.8 phút)
+[21:16:26] === BẮT ĐẦU Lab #2 slide: khởi tạo x CutMix
+[21:16:26] === BẮT ĐẦU train T00 {'backbone': 'convnext_tiny', 'seed': 0}
+[21:16:26] === XONG train T00 {'backbone': 'convnext_tiny', 'seed': 0} (0.0 phút)
+[21:16:26] === BẮT ĐẦU train T01 {'backbone': 'convnext_tiny', 'seed': 0, 'init': 'scratch'}
+[21:26:47] === XONG train T01 {'backbone': 'convnext_tiny', 'seed': 0, 'init': 'scratch'} (10.4 phút)
+[21:26:47] === BẮT ĐẦU train T02 {'backbone': 'convnext_tiny', 'seed': 0, 'init': 'frozen'}
+[21:31:24] === XONG train T02 {'backbone': 'convnext_tiny', 'seed': 0, 'init': 'frozen'} (4.6 phút)
+[21:31:24] === BẮT ĐẦU train T08 {'backbone': 'convnext_tiny', 'seed': 0, 'mix': 'cutmix', 'mix_alpha': 1.0}
+[21:41:51] === XONG train T08 {'backbone': 'convnext_tiny', 'seed': 0, 'mix': 'cutmix', 'mix_alpha': 1.0} (10.4 phút)
+[21:41:51] === BẮT ĐẦU train T19 {'backbone': 'convnext_tiny', 'seed': 0, 'init': 'scratch', 'mix': 'cutmix', 'mix_alpha': 1.0}
+[21:52:11] === XONG train T19 {'backbone': 'convnext_tiny', 'seed': 0, 'init': 'scratch', 'mix': 'cutmix', 'mix_alpha': 1.0} (10.3 phút)
+[21:52:12] === BẮT ĐẦU train T20 {'backbone': 'convnext_tiny', 'seed': 0, 'init': 'frozen', 'mix': 'cutmix', 'mix_alpha': 1.0}
+[21:56:51] === XONG train T20 {'backbone': 'convnext_tiny', 'seed': 0, 'init': 'frozen', 'mix': 'cutmix', 'mix_alpha': 1.0} (4.7 phút)
+[21:56:51] === BẮT ĐẦU train T00 {'backbone': 'convnext_tiny', 'seed': 1}
+[21:56:51] === XONG train T00 {'backbone': 'convnext_tiny', 'seed': 1} (0.0 phút)
+[21:56:51] === BẮT ĐẦU train T01 {'backbone': 'convnext_tiny', 'seed': 1, 'init': 'scratch'}
+[22:07:11] === XONG train T01 {'backbone': 'convnext_tiny', 'seed': 1, 'init': 'scratch'} (10.3 phút)
+[22:07:11] === BẮT ĐẦU train T02 {'backbone': 'convnext_tiny', 'seed': 1, 'init': 'frozen'}
+[22:11:49] === XONG train T02 {'backbone': 'convnext_tiny', 'seed': 1, 'init': 'frozen'} (4.6 phút)
+[22:11:49] === BẮT ĐẦU train T08 {'backbone': 'convnext_tiny', 'seed': 1, 'mix': 'cutmix', 'mix_alpha': 1.0}
+[22:22:13] === XONG train T08 {'backbone': 'convnext_tiny', 'seed': 1, 'mix': 'cutmix', 'mix_alpha': 1.0} (10.4 phút)
+[22:22:13] === BẮT ĐẦU train T19 {'backbone': 'convnext_tiny', 'seed': 1, 'init': 'scratch', 'mix': 'cutmix', 'mix_alpha': 1.0}
+[22:32:33] === XONG train T19 {'backbone': 'convnext_tiny', 'seed': 1, 'init': 'scratch', 'mix': 'cutmix', 'mix_alpha': 1.0} (10.3 phút)
+[22:32:33] === BẮT ĐẦU train T20 {'backbone': 'convnext_tiny', 'seed': 1, 'init': 'frozen', 'mix': 'cutmix', 'mix_alpha': 1.0}
+[22:37:12] === XONG train T20 {'backbone': 'convnext_tiny', 'seed': 1, 'init': 'frozen', 'mix': 'cutmix', 'mix_alpha': 1.0} (4.6 phút)
+[22:37:12] === BẮT ĐẦU train T00 {'backbone': 'convnext_tiny', 'seed': 2}
+[22:37:12] === XONG train T00 {'backbone': 'convnext_tiny', 'seed': 2} (0.0 phút)
+[22:37:12] === BẮT ĐẦU train T01 {'backbone': 'convnext_tiny', 'seed': 2, 'init': 'scratch'}
+[22:47:33] === XONG train T01 {'backbone': 'convnext_tiny', 'seed': 2, 'init': 'scratch'} (10.3 phút)
+[22:47:33] === BẮT ĐẦU train T02 {'backbone': 'convnext_tiny', 'seed': 2, 'init': 'frozen'}
+[22:52:11] === XONG train T02 {'backbone': 'convnext_tiny', 'seed': 2, 'init': 'frozen'} (4.6 phút)
+[22:52:11] === BẮT ĐẦU train T08 {'backbone': 'convnext_tiny', 'seed': 2, 'mix': 'cutmix', 'mix_alpha': 1.0}
+[23:02:35] === XONG train T08 {'backbone': 'convnext_tiny', 'seed': 2, 'mix': 'cutmix', 'mix_alpha': 1.0} (10.4 phút)
+[23:02:35] === BẮT ĐẦU train T19 {'backbone': 'convnext_tiny', 'seed': 2, 'init': 'scratch', 'mix': 'cutmix', 'mix_alpha': 1.0}
+[23:12:54] === XONG train T19 {'backbone': 'convnext_tiny', 'seed': 2, 'init': 'scratch', 'mix': 'cutmix', 'mix_alpha': 1.0} (10.3 phút)
+[23:12:54] === BẮT ĐẦU train T20 {'backbone': 'convnext_tiny', 'seed': 2, 'init': 'frozen', 'mix': 'cutmix', 'mix_alpha': 1.0}
+[23:17:34] === XONG train T20 {'backbone': 'convnext_tiny', 'seed': 2, 'init': 'frozen', 'mix': 'cutmix', 'mix_alpha': 1.0} (4.7 phút)
+[23:17:34] === XONG Lab #2 slide: khởi tạo x CutMix (121.1 phút)
+[23:17:34] === BẮT ĐẦU Phụ 3: chạy lại các ablation bị mất khi VM bị thu hồi
+[23:17:34] === BẮT ĐẦU train T04 {'backbone': 'convnext_tiny', 'seed': 0, 'aug': 'color'}
+[23:27:55] === XONG train T04 {'backbone': 'convnext_tiny', 'seed': 0, 'aug': 'color'} (10.4 phút)
+[23:27:55] === BẮT ĐẦU train T17 {'backbone': 'convnext_tiny', 'seed': 0, 'epochs': 20}
+[23:47:43] === XONG train T17 {'backbone': 'convnext_tiny', 'seed': 0, 'epochs': 20} (19.8 phút)
+[23:47:43] === BẮT ĐẦU train T10 {'backbone': 'convnext_tiny', 'seed': 0, 'loss': 'focal', 'focal_gamma': 2.0}
+[23:57:48] === XONG train T10 {'backbone': 'convnext_tiny', 'seed': 0, 'loss': 'focal', 'focal_gamma': 2.0} (10.1 phút)
+[23:57:48] === BẮT ĐẦU train T11 {'backbone': 'convnext_tiny', 'seed': 0, 'loss': 'ce_weighted'}
+[00:07:59] === XONG train T11 {'backbone': 'convnext_tiny', 'seed': 0, 'loss': 'ce_weighted'} (10.2 phút)
+[00:07:59] === BẮT ĐẦU train T12 {'backbone': 'convnext_tiny', 'seed': 0, 'sampler': 'balanced'}
+[00:18:08] === XONG train T12 {'backbone': 'convnext_tiny', 'seed': 0, 'sampler': 'balanced'} (10.1 phút)
+[00:18:08] === XONG Phụ 3: chạy lại các ablation bị mất khi VM bị thu hồi (60.6 phút)
+[00:18:08] === BẮT ĐẦU Dọn dẹp
+[00:18:08] HOÀN TẤT sau 4.98 giờ
+[00:18:08] === XONG Dọn dẹp (0.0 phút)

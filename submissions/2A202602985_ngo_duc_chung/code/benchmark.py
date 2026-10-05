@@ -39,6 +39,20 @@ def bench(fn, warmup: int = 10, iters: int = 100, sync=None) -> dict:
             "p99": float(np.percentile(a, 99)), "mean": float(a.mean()), "n": iters}
 
 
+def _sync_for(device: str):
+    if device.startswith("cuda"):
+        return torch.cuda.synchronize
+    if device.startswith("mps"):
+        return torch.mps.synchronize
+    return None
+
+
+def _gpu_name(device: str) -> str:
+    if device.startswith("cuda"):
+        return torch.cuda.get_device_name(0)
+    return "Apple GPU (MPS)" if device.startswith("mps") else "cpu"
+
+
 def _prepare(model, dtype: str, device: str):
     if dtype not in ("fp32", "amp", "fp16"):
         raise ValueError("dtype phải là fp32|amp|fp16")
@@ -70,9 +84,9 @@ def latency_report(model, batch_size: int, img_size: int, dtype: str = "fp32", d
     m = _prepare(model, dtype, device)
     x = torch.randn(batch_size, 3, img_size, img_size, device=device,
                     dtype=torch.float16 if dtype == "fp16" else torch.float32)
-    sync = torch.cuda.synchronize if device.startswith("cuda") else None
+    sync = _sync_for(device)
     r = bench(_make_forward(m, x, dtype, device), warmup, iters, sync)
-    return {"gpu": torch.cuda.get_device_name(0) if device.startswith("cuda") else "cpu",
+    return {"gpu": _gpu_name(device),
             "dtype": dtype, "batch": batch_size, "img_size": img_size,
             "p50": r["p50"], "p95": r["p95"], "p99": r["p99"], "mean": r["mean"], "n": r["n"],
             "images_per_s": batch_size / (r["p50"] / 1000.0), "torch": torch.__version__}
@@ -84,7 +98,7 @@ def tta_latency(model, k_views: int, batch_size: int = 1, img_size: int = 224, d
     m = _prepare(model, dtype, device)
     x = torch.randn(batch_size, 3, img_size, img_size, device=device,
                     dtype=torch.float16 if dtype == "fp16" else torch.float32)
-    sync = torch.cuda.synchronize if device.startswith("cuda") else None
+    sync = _sync_for(device)
     one = bench(_make_forward(m, x, dtype, device, 1), warmup, iters, sync)
     many = bench(_make_forward(m, x, dtype, device, k_views), warmup, iters, sync)
     return {"k_views": k_views, "p50_1view": one["p50"], "p50": many["p50"], "p95": many["p95"],

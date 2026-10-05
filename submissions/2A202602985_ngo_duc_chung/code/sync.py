@@ -61,19 +61,22 @@ def sync_to_repo(repo_dir: str | Path, sub: str | Path, message: str = "Update r
         paths = [str(sub / p) for p in (*SYNC_DIRS, "tables", "results.xlsx", "report.md", "README.md", "code")
                  if (sub / p).exists()]
         _git(repo, "add", "--", *paths)
-        if _git(repo, "diff", "--cached", "--quiet", check=False).returncode == 0:
-            return out                               # không có gì mới
-        _git(repo, "commit", "-m", message)
-        out["committed"] = True
+        if _git(repo, "diff", "--cached", "--quiet", check=False).returncode != 0:
+            _git(repo, "commit", "-m", message)
+            out["committed"] = True
         if push:
-            pull = _git(repo, "pull", "--rebase", "origin", branch, check=False)
+            # --autostash: các thay đổi chưa stage (ví dụ .gitignore sửa trên Colab) không chặn pull
+            pull = _git(repo, "pull", "--rebase", "--autostash", "origin", branch, check=False)
             if pull.returncode != 0:
                 _git(repo, "rebase", "--abort", check=False)
                 raise RuntimeError(f"pull --rebase lỗi: {pull.stderr.strip()[:300]}")
-            p = _git(repo, "push", "origin", f"HEAD:{branch}", check=False)
-            if p.returncode != 0:
-                raise RuntimeError(f"push lỗi (token hết hạn/không đủ quyền?): {p.stderr.strip()[:300]}")
-            out["pushed"] = True
+            # đẩy cả các commit còn tồn từ lần trước (push lỗi) dù lần này không có file mới
+            ahead = _git(repo, "rev-list", "--count", f"origin/{branch}..HEAD", check=False).stdout.strip()
+            if ahead and int(ahead) > 0:
+                p = _git(repo, "push", "origin", f"HEAD:{branch}", check=False)
+                if p.returncode != 0:
+                    raise RuntimeError(f"push lỗi (token hết hạn/không đủ quyền?): {p.stderr.strip()[:300]}")
+                out["pushed"] = True
     except Exception as e:  # không để lỗi git làm hỏng thí nghiệm
         out["error"] = str(e)
         print(f"[sync] CẢNH BÁO: {e}")

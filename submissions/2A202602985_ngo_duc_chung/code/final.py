@@ -40,7 +40,7 @@ def tta_preset(name: str, img_size: int):
 
 def final_predict(cfg: T.Config, tta: str = "none", space: str = "prob", calibrate: bool = True,
                   device=None, amp: bool = False) -> dict:
-    device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = device or T.M.get_device()
     test_file = T.pred_path(cfg, "test")
     uncal_cfg = T.Config(**{**cfg.__dict__, "exp_id": cfg.exp_id + "uncal"})
     if test_file.exists():

@@ -20,7 +20,7 @@ from train import Config, set_seed
 
 
 def _device():
-    return torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    return M.get_device()
 
 
 def _first_batch(cfg: Config, n: int, train_tf: bool):

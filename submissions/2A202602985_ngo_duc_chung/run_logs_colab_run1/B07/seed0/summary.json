@@ -1,0 +1,16 @@
+{
+  "exp_id": "B07",
+  "seed": 0,
+  "backbone": "mobilenetv3_large_100",
+  "init": "finetune",
+  "pretrained_tag": "ra_in1k",
+  "best_epoch": 8,
+  "val_macro_f1": 0.8292145936660318,
+  "val_top1": 0.8717509283061983,
+  "val_loss": 0.3877486412915391,
+  "val_ece": 0.020648212785329145,
+  "sec_per_epoch": 30.81828114280006,
+  "params_m": 4.213561,
+  "gmacs": 0.21532128,
+  "epochs": 10
+}

@@ -1,0 +1,2 @@
+exp_id,phương pháp,mô hình,K,macro_f1,top1,ece,nll,ghi chú
+I05,Ensemble convnext_tiny+swin_tiny_patch4_window7_224+deit_small_patch16_224,B03+B05+B04 (huấn luyện lại),3,0.9759383824240859,0.9820051413881749,0.01155010561914236,0.0769944850257869,"3 backbone tốt nhất ở Bước 1 (chọn theo val), trung bình xác suất"

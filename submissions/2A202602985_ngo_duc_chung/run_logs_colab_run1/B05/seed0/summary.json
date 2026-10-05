@@ -1,0 +1,16 @@
+{
+  "exp_id": "B05",
+  "seed": 0,
+  "backbone": "swin_tiny_patch4_window7_224",
+  "init": "finetune",
+  "pretrained_tag": "ms_in1k",
+  "best_epoch": 10,
+  "val_macro_f1": 0.965477241659833,
+  "val_top1": 0.9740074264495858,
+  "val_loss": 0.1054270327616865,
+  "val_ece": 0.01089589409630953,
+  "sec_per_epoch": 69.97168985440013,
+  "params_m": 27.526275,
+  "gmacs": 4.489805568,
+  "epochs": 10
+}

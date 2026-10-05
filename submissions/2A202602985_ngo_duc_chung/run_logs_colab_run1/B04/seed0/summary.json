@@ -1,0 +1,16 @@
+{
+  "exp_id": "B04",
+  "seed": 0,
+  "backbone": "deit_small_patch16_224",
+  "init": "finetune",
+  "pretrained_tag": "fb_in1k",
+  "best_epoch": 9,
+  "val_macro_f1": 0.9578244922523732,
+  "val_top1": 0.9697229363039132,
+  "val_loss": 0.10348318439265365,
+  "val_ece": 0.007567998639714653,
+  "sec_per_epoch": 38.211688293499904,
+  "params_m": 21.669129,
+  "gmacs": 4.59850176,
+  "epochs": 10
+}
