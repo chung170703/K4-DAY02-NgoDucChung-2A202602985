@@ -159,9 +159,15 @@ def main():
     top["ghi chú"] = np.where(top.exp_id == "T00", "mốc", np.where(top.exp_id == "F01", "chung kết (EMA); số test ở sheet Final", ""))
 
     lab2 = pd.read_csv(TAB / "lab2_slide_matrix.csv")
+    # bài làm thêm (điểm thưởng, lượt 4, chỉ val): DINOv2 linear probe, lệch phân phối, ONNX
+    bonus = {}
+    if (TAB / "bonus_dino_runs.csv").exists():
+        bonus["Bonus_DINOv2"] = pd.read_csv(TAB / "bonus_dino_runs.csv")[["exp_id", "backbone", "pretrained_tag", "init", "params_m", "val_macro_f1", "val_top1", "val_ece", "best_epoch", "sec_per_epoch"]]
+        bonus["Bonus_Shift"] = pd.read_csv(TAB / "bonus_shift.csv")
+        bonus["Bonus_ONNX"] = pd.read_csv(TAB / "bonus_onnx.csv")
 
     sheets = {"Backbones": bbt, "Training": train_t, "Inference": inf_t, "Final": final_t, "PerClass": perclass_t, "Latency": lat_t,
-              "Summary": top, "Lab2_Slide": lab2}
+              "Summary": top, "Lab2_Slide": lab2, **bonus}
     TB.write_results_xlsx(SUB / "results.xlsx", sheets, {"Backbones": "val_macro_f1", "Summary": "val_macro_f1"})
     print("đã ghi", SUB / "results.xlsx", {k: len(v) for k, v in sheets.items()})
     (TAB / "noise_summary.json").write_text(json.dumps({"colab_T00_sigma": sig_c, "colab_T00_mean": mean_c, "colab_T00_seed0": ref_c,

@@ -1,0 +1,3 @@
+runtime,p50,p95,p99,n,max|Δ logit| so với PyTorch,torch,onnxruntime,ghi chú
+PyTorch FP32 (CPU),80.4692654999144,85.67231649999485,98.241255550031,100,9.5367431640625e-07,2.11.0+cu128,1.30.0,"batch 1, ảnh 224, 4 CPU, warmup 10, 100 lần đo, không tính tiền xử lý; file .onnx 111 MB không nộp"
+ONNX Runtime FP32 (CPU),65.59375799997724,68.07489414993597,70.2150227500465,100,9.5367431640625e-07,2.11.0+cu128,1.30.0,"batch 1, ảnh 224, 4 CPU, warmup 10, 100 lần đo, không tính tiền xử lý; file .onnx 111 MB không nộp"

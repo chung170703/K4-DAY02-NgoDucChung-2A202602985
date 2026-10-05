@@ -10,6 +10,7 @@ Ngô Đức Chung · 2A202602985 · Track 4 · Ngày 2. Mọi số liệu lấy 
 - **Kết quả test (mean ± std, 3 seed):** top-1 **97,91 ± 0,29%**, macro-F1 **0,9738 ± 0,0035**, ECE 0,0057 ± 0,0011; recall Chinee apple 95,3 ± 1,4%, Snake weed 94,9 ± 1,0%. Độ trễ p95 batch-1 là 31,8 ms (T4).
 - **So với mốc** (`T00` + 1 view, 3 seed): macro-F1 0,9710 ± 0,0048, top-1 97,66 ± 0,38%. Chênh macro-F1 là +0,0027, **nhỏ hơn độ lệch chuẩn giữa các seed (0,0048), nên không phân biệt được** F01 với mốc.
 - **Kết luận chính:** yếu tố quyết định là **chọn backbone/trọng số tiền huấn luyện** (ConvNeXt, Swin, DeiT đạt macro-F1 val ≥ 0,958 còn các CNN còn lại 0,83–0,86); mọi yếu tố công thức và suy luận chỉ thay đổi trong cỡ nhiễu giữa các lần chạy (~0,003–0,01).
+- **Bài làm thêm (chỉ val):** DINOv2 linear probe (0,874 so với 0,971 khi tinh chỉnh), lệch phân phối (làm mờ phá hủy mô hình: macro-F1 0,35), Grad-CAM cho ca bị nhầm, ONNX (nhanh hơn PyTorch ≈1,23× trên CPU) — mục 9.
 - **Điều cần biết (trung thực):** máy ảo Colab bị thu hồi giữa chừng nên một phần ablation phải chạy lại trên Kaggle (mục 2.3). Số liệu của các lần chạy đã mất log được ghi riêng ở Phụ lục B và không dùng để kết luận.
 
 ## 2. Dữ liệu và thiết lập
@@ -153,9 +154,49 @@ CutMix với tinh chỉnh: +0,0016 top-1 và +0,0016 macro-F1, nhỏ hơn std (k
 - **Lượt chạy thử:** trước lượt chạy chính trên Colab, tôi chạy thử cả pipeline 1 epoch (vài batch) để kiểm tra môi trường, gồm cả bước test, trên mô hình chưa huấn luyện; kết quả bị bỏ, không dùng để chọn gì. Máy ảo của lần chạy thử đã bị thu hồi cùng lượt 1.
 - **Việc tiếp theo:** thử trọng số ResNet khác tag, thêm seed cho ablation, kiểm chứng giả thuyết triệt tiêu của T21 (ghép hai yếu tố, hoặc huấn luyện 20 epoch), dò độ phân giải 256 làm mặc định, nhiều fold, Grad-CAM cho ca bị nhầm với `Negative`.
 
+## 9. Bài làm thêm (điểm thưởng; chỉ dùng val, không chạm test)
+
+Chạy ở lượt 4 (Kaggle T4, `code/lab_day2_bonus.ipynb`, `logs/stdout_kaggle_run4_bonus.txt`) với mô hình `BON_F01` = ConvNeXt-tiny + T00 + EMA 0,99, seed 0 (cùng cấu hình F01 seed 0; macro-F1 val 0,9704, đúng bằng F01 seed 0 của lượt 2). Số liệu: sheet `Bonus_*` của `results.xlsx`, `tables/bonus_*`.
+
+### 9.1 Linear probe DINOv2 (ViT-S/14, đóng băng) so với ConvNeXt-tiny
+| mô hình | huấn luyện | macro-F1 val | top-1 val | ECE val |
+|---|---|---|---|---|
+| DINOv2 ViT-S/14 (`lvd142m`) | chỉ head (linear probe), 1 seed | 0,8743 | 0,8983 | 0,0275 |
+| ConvNeXt-tiny (`in12k_ft_in1k`) | đóng băng (T02), 3 seed | 0,8528 ± 0,0035 | 0,8835 ± 0,0035 | – |
+| ConvNeXt-tiny | tinh chỉnh toàn bộ (T00), 3 seed | 0,9710 ± 0,0042 | 0,9775 ± 0,0034 | – |
+
+DINOv2 đóng băng hơn ConvNeXt đóng băng ≈ +0,02 macro-F1 (lớn hơn std của T02 nhưng DINOv2 chỉ 1 seed), nhưng **thấp hơn tinh chỉnh toàn bộ ≈ 0,097**. Với ~10 nghìn ảnh cỏ dại nhỏ, đặc trưng đóng băng (kể cả của mô hình nền tảng) chưa đủ phân biệt các loài; tinh chỉnh vẫn cần. Giới hạn: head chỉ được huấn luyện 10 epoch với LR 1e-3 và không dò LR, nên có thể chưa tối ưu.
+
+### 9.2 Lệch phân phối: ảnh val bị làm tối / làm mờ / thêm nhiễu (`tables/bonus_shift.csv`)
+Độ sáng ×0,35; làm mờ Gauss (kernel 9, σ = 3); nhiễu Gauss σ = 0,10 trên ảnh [0,1]; mô hình `BON_F01`, 1 view. T khớp trên val sạch (T = 1,049).
+| điều kiện | macro-F1 | top-1 | ECE chưa hiệu chuẩn | ECE sau hiệu chuẩn |
+|---|---|---|---|---|
+| sạch | 0,9707 | 0,9769 | 0,0059 | 0,0063 |
+| tối | 0,9186 | 0,9309 | 0,0099 | 0,0085 |
+| nhiễu | 0,8580 | 0,8843 | 0,0367 | 0,0321 |
+| mờ | **0,3478** | 0,6147 | **0,2770** | 0,2687 |
+
+Làm mờ phá hủy mô hình (macro-F1 0,97 → 0,35) và mô hình vẫn rất tự tin (ECE 0,28); làm tối và thêm nhiễu giảm 0,05 và 0,11 macro-F1. Temperature scaling khớp trên val sạch chỉ giảm ECE rất ít dưới lệch miền (tối 0,0099 → 0,0085; nhiễu 0,0367 → 0,0321; mờ 0,277 → 0,269) và không cứu được độ chính xác; trên ảnh sạch nó còn nhỉnh ECE lên (0,0059 → 0,0063, vì T ≈ 1). Nghĩa là **T khớp trên val không đáng tin khi triển khai ở miền khác**, đúng như lo ngại nêu ở mục 8. Hàm ý: cần augmentation làm mờ/nhiễu/ánh sáng khi huấn luyện và theo dõi trôi dạt dữ liệu. Giới hạn: một mức nhiễu cho mỗi kiểu, một mô hình, chỉ val; mức làm mờ σ = 3 khá mạnh với ảnh 256×256.
+
+### 9.3 Grad-CAM cho ca val bị đoán sai (`tables/bonus_gradcam.png`)
+Trong 81 ca val bị đoán sai của `BON_F01`, tôi vẽ 8 ca: 6 ca Chinee apple / Snake weed bị đoán thành `Negative` và 2 ca `Negative` bị đoán thành Lantana (Grad-CAM theo lớp được đoán, lớp cuối của ConvNeXt).
+
+![Grad-CAM](tables/bonus_gradcam.png)
+
+Ở các ca Chinee apple → `Negative`, vùng nóng nằm ở mảng lá/rác khô nhỏ, nền đất trơ hoặc rìa bóng đổ, không tập trung vào một cây rõ ràng; ở hai ca `Negative` → Lantana, vùng nóng nằm trên cụm lá (một ca có hoa trắng nhỏ). Đây là **giả thuyết phù hợp với mục 6.1**: cây mục tiêu nhỏ, lẫn trong lớp phủ nên bằng chứng nghiêng về nền. Grad-CAM chỉ gợi ý vùng ảnh hưởng quyết định, không chứng minh nguyên nhân.
+
+### 9.4 Xuất ONNX và độ trễ (`tables/bonus_onnx.csv`)
+Batch 1, ảnh 224, FP32, 4 CPU của Kaggle, warmup 10, 100 lần đo, không tính tiền xử lý (cùng thiết bị cho cả hai):
+| runtime | p50 (ms) | p95 (ms) | p99 (ms) |
+|---|---|---|---|
+| PyTorch (CPU) | 80,5 | 85,7 | 98,2 |
+| ONNX Runtime (CPU) | 65,6 | 68,1 | 70,2 |
+
+ONNX Runtime nhanh hơn ≈ 1,23× theo p50 (≈ 1,26× theo p95), sai số logit lớn nhất so với PyTorch 9,5e-7. Chỉ so trên CPU (không cài `onnxruntime-gpu`), nên không so được với độ trễ GPU 6,3 ms ở mục 5. File `.onnx` (111 MB) không nộp.
+
 ## Phụ lục A. Danh sách exp_id
 
-`B01–B07` backbone (lượt 1, Colab; `B03/B04/B05` còn chạy lại ở lượt 2 để làm ensemble) · `T00` mốc (3 seed, mỗi lượt một bộ) · `T01` từ đầu · `T02` đóng băng · `T03` hình học · `T04` đổi màu · `T08` CutMix · `T09` label smoothing · `T10` focal · `T11` CE trọng số · `T12` sampler cân bằng · `T14` LR cao · `T17` 20 epoch · `T19` từ đầu + CutMix · `T20` đóng băng + CutMix · `T21` tổ hợp CE trọng số + CutMix + EMA (lượt 3, chỉ val) · `F01` chung kết (EMA; 3 seed) · `F01uncal` bản chưa hiệu chuẩn · `I00–I08` suy luận. Cấu hình đầy đủ ở `run_logs*/<exp_id>/seed<k>/config.json`; đường cong ở `curves/<exp_id>_*.png`; notebook ở `code/lab_day2_kaggle.ipynb` (lượt 1), `code/lab_day2_recovery.ipynb` (lượt 2) và `code/lab_day2_combo.ipynb` (lượt 3, T21).
+`B01–B07` backbone (lượt 1, Colab; `B03/B04/B05` còn chạy lại ở lượt 2 để làm ensemble) · `T00` mốc (3 seed, mỗi lượt một bộ) · `T01` từ đầu · `T02` đóng băng · `T03` hình học · `T04` đổi màu · `T08` CutMix · `T09` label smoothing · `T10` focal · `T11` CE trọng số · `T12` sampler cân bằng · `T14` LR cao · `T17` 20 epoch · `T19` từ đầu + CutMix · `T20` đóng băng + CutMix · `T21` tổ hợp CE trọng số + CutMix + EMA (lượt 3, chỉ val) · `BON_F01` (ConvNeXt-tiny + EMA, seed 0, cho mục 9) · `BON_DINO` (linear probe DINOv2) · `F01` chung kết (EMA; 3 seed) · `F01uncal` bản chưa hiệu chuẩn · `I00–I08` suy luận. Cấu hình đầy đủ ở `run_logs*/<exp_id>/seed<k>/config.json`; đường cong ở `curves/<exp_id>_*.png`; notebook ở `code/lab_day2_kaggle.ipynb` (lượt 1), `code/lab_day2_recovery.ipynb` (lượt 2) `code/lab_day2_combo.ipynb` (lượt 3, T21) và `code/lab_day2_bonus.ipynb` (lượt 4, mục 9).
 
 ## Phụ lục B. Số liệu lượt 1 đã mất log (không dùng để kết luận)
 

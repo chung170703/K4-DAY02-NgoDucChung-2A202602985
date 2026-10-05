@@ -1,0 +1,16 @@
+{
+  "exp_id": "BON_DINO",
+  "seed": 0,
+  "backbone": "vit_small_patch14_dinov2.lvd142m",
+  "init": "frozen",
+  "pretrained_tag": "lvd142m",
+  "best_epoch": 8,
+  "val_macro_f1": 0.8743031732292634,
+  "val_top1": 0.8983147672093688,
+  "val_loss": 0.3015123415899018,
+  "val_ece": 0.027453143394455978,
+  "sec_per_epoch": 16.753182246299957,
+  "params_m": 21.632265,
+  "gmacs": 6.12356544,
+  "epochs": 10
+}

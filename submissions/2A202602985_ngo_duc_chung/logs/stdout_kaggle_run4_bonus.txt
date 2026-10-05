@@ -1,0 +1,147 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+/tmp/ipykernel_23/111441024.py:12: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+  tf.extractall(ROOT)
+
+/tmp/ipykernel_23/111441024.py:12: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+  tf.extractall(ROOT)
+python 3.13.15 | torch 2.11.0+cu128 | timm 1.0.29
+GPU: Tesla T4
+tải images.zip, lần 1
+MD5 OK
+17509 ảnh (kỳ vọng 17509) | /content/data
+[02:34:38] bắt đầu | nền tảng=Kaggle | Drive backup=None | workers=4 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[02:34:38] === BẮT ĐẦU Bước 0: kiểm tra split
+Số ảnh: {'train': 10501, 'val': 3501, 'test': 3507} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '59.97%', 'val': '20.00%', 'test': '20.03%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      675   225   226
+1 Lantana           637   213   213
+2 Parkinsonia       618   206   207
+3 Parthenium        613   204   205
+4 Prickly Acacia    637   212   213
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        609   203   204
+8 Negatives        5463  1821  1822
+File thiếu trong /content/data: 0
+[02:34:38] === XONG Bước 0: kiểm tra split (0.0 phút)
+[02:34:38] === BẮT ĐẦU Bonus: huấn luyện BON_F01 và DINOv2 linear probe
+[02:34:38] === BẮT ĐẦU BON_F01 train
+[BON_F01 seed0] thiết bị: cuda | AMP: True
+Số ảnh: {'train': 10501, 'val': 3501, 'test': 3507} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '59.97%', 'val': '20.00%', 'test': '20.03%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      675   225   226
+1 Lantana           637   213   213
+2 Parkinsonia       618   206   207
+3 Parthenium        613   204   205
+4 Prickly Acacia    637   212   213
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        609   203   204
+8 Negatives        5463  1821  1822
+File thiếu trong /content/data: 0
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+[BON_F01 seed0] ep 1/10 loss 0.7414 | val loss 0.2583 F1 0.8937 top1 0.9183 | 60s
+[BON_F01 seed0] ep 2/10 loss 0.3734 | val loss 0.1584 F1 0.9408 top1 0.9532 | 50s
+[BON_F01 seed0] ep 3/10 loss 0.2637 | val loss 0.1203 F1 0.9503 top1 0.9614 | 52s
+[BON_F01 seed0] ep 4/10 loss 0.2279 | val loss 0.1069 F1 0.9604 top1 0.9689 | 52s
+[BON_F01 seed0] ep 5/10 loss 0.1798 | val loss 0.0829 F1 0.9704 top1 0.9766 | 51s
+[BON_F01 seed0] ep 6/10 loss 0.1289 | val loss 0.0876 F1 0.9659 top1 0.9751 | 51s
+[BON_F01 seed0] ep 7/10 loss 0.0969 | val loss 0.0944 F1 0.9673 top1 0.9754 | 51s
+[BON_F01 seed0] ep 8/10 loss 0.0724 | val loss 0.1008 F1 0.9660 top1 0.9746 | 51s
+[BON_F01 seed0] ep 9/10 loss 0.0565 | val loss 0.1017 F1 0.9682 top1 0.9757 | 51s
+[BON_F01 seed0] ep 10/10 loss 0.0469 | val loss 0.1042 F1 0.9668 top1 0.9749 | 50s
+[02:45:06] === XONG BON_F01 train (10.5 phút)
+[02:45:06] === BẮT ĐẦU BON_DINO linear probe
+[BON_DINO seed0] thiết bị: cuda | AMP: True
+Số ảnh: {'train': 10501, 'val': 3501, 'test': 3507} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '59.97%', 'val': '20.00%', 'test': '20.03%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      675   225   226
+1 Lantana           637   213   213
+2 Parkinsonia       618   206   207
+3 Parthenium        613   204   205
+4 Prickly Acacia    637   212   213
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        609   203   204
+8 Negatives        5463  1821  1822
+File thiếu trong /content/data: 0
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+[BON_DINO seed0] ep 1/10 loss 1.0836 | val loss 0.4791 F1 0.8048 top1 0.8446 | 17s
+[BON_DINO seed0] ep 2/10 loss 0.4420 | val loss 0.3773 F1 0.8456 top1 0.8743 | 18s
+[BON_DINO seed0] ep 3/10 loss 0.3717 | val loss 0.3487 F1 0.8565 top1 0.8840 | 17s
+[BON_DINO seed0] ep 4/10 loss 0.3533 | val loss 0.3284 F1 0.8668 top1 0.8903 | 16s
+[BON_DINO seed0] ep 5/10 loss 0.3293 | val loss 0.3239 F1 0.8682 top1 0.8926 | 17s
+[BON_DINO seed0] ep 6/10 loss 0.3171 | val loss 0.3143 F1 0.8713 top1 0.8949 | 17s
+[BON_DINO seed0] ep 7/10 loss 0.3117 | val loss 0.3102 F1 0.8737 top1 0.8972 | 17s
+[BON_DINO seed0] ep 8/10 loss 0.2955 | val loss 0.3015 F1 0.8743 top1 0.8983 | 17s
+[BON_DINO seed0] ep 9/10 loss 0.2913 | val loss 0.3015 F1 0.8708 top1 0.8955 | 17s
+[BON_DINO seed0] ep 10/10 loss 0.2936 | val loss 0.3011 F1 0.8713 top1 0.8955 | 17s
+[02:49:15] === XONG BON_DINO linear probe (4.2 phút)
+  exp_id                         backbone pretrained_tag  params_m  val_macro_f1  val_top1  val_ece  best_epoch  sec_per_epoch
+BON_DINO vit_small_patch14_dinov2.lvd142m        lvd142m 21.632265      0.874303  0.898315 0.027453           8      16.753182
+ BON_F01                    convnext_tiny  in12k_ft_in1k 27.827049      0.970375  0.976578 0.005663           5      51.965317
+[02:49:15] === XONG Bonus: huấn luyện BON_F01 và DINOv2 linear probe (14.6 phút)
+[02:49:15] === BẮT ĐẦU Bonus: lệch phân phối
+điều kiện ảnh val                                  hiệu chuẩn  macro_f1   top1    ece    nll
+             sạch                       chưa hiệu chuẩn (T=1)    0.9707 0.9769 0.0059 0.0828
+             sạch đã hiệu chuẩn (T=1.049, khớp trên val sạch)    0.9707 0.9769 0.0063 0.0826
+              tối                       chưa hiệu chuẩn (T=1)    0.9186 0.9309 0.0099 0.1998
+              tối đã hiệu chuẩn (T=1.049, khớp trên val sạch)    0.9186 0.9309 0.0085 0.1999
+               mờ                       chưa hiệu chuẩn (T=1)    0.3478 0.6147 0.2770 1.4860
+               mờ đã hiệu chuẩn (T=1.049, khớp trên val sạch)    0.3478 0.6147 0.2687 1.4340
+            nhiễu                       chưa hiệu chuẩn (T=1)    0.8580 0.8843 0.0367 0.3617
+            nhiễu đã hiệu chuẩn (T=1.049, khớp trên val sạch)    0.8580 0.8843 0.0321 0.3562
+[02:51:05] === XONG Bonus: lệch phân phối (1.8 phút)
+[02:51:05] === BẮT ĐẦU Bonus: Grad-CAM
+81 ca val bị đoán sai; đã vẽ 8
+[02:51:32] === XONG Bonus: Grad-CAM (0.4 phút)
+[02:51:32] === BẮT ĐẦU Bonus: ONNX
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 23.6/23.6 MB 59.9 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 23.6/23.6 MB 59.9 MB/s eta 0:00:00
+/tmp/ipykernel_23/2029840885.py:7: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(mcpu, x, path, input_names=["x"], output_names=["logits"], opset_version=17, dynamo=False)
+
+/tmp/ipykernel_23/2029840885.py:7: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(mcpu, x, path, input_names=["x"], output_names=["logits"], opset_version=17, dynamo=False)
+                runtime    p50    p95    p99   n  max|Δ logit| so với PyTorch        torch onnxruntime                                                                                            ghi chú
+     PyTorch FP32 (CPU) 80.469 85.672 98.241 100                          0.0 2.11.0+cu128      1.30.0 batch 1, ảnh 224, 4 CPU, warmup 10, 100 lần đo, không tính tiền xử lý; file .onnx 111 MB không nộp
+ONNX Runtime FP32 (CPU) 65.594 68.075 70.215 100                          0.0 2.11.0+cu128      1.30.0 batch 1, ảnh 224, 4 CPU, warmup 10, 100 lần đo, không tính tiền xử lý; file .onnx 111 MB không nộp
+[02:51:57] === XONG Bonus: ONNX (0.4 phút)
+[02:51:57] === BẮT ĐẦU Dọn dẹp
+đã xoá checkpoint: 198 MB | tổng thời gian 0.31 giờ
+[02:51:57] HOÀN TẤT sau 0.31 giờ
+[02:51:57] === XONG Dọn dẹp (0.0 phút)
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 3340730 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Support files will be in __results___files/
+[NbConvertApp] Making directory __results___files
+[NbConvertApp] Writing 476958 bytes to __results__.html

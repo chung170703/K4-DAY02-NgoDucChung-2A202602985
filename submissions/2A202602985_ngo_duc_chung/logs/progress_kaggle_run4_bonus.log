@@ -1,0 +1,18 @@
+[02:34:38] bắt đầu | nền tảng=Kaggle | Drive backup=None | workers=4 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[02:34:38] === BẮT ĐẦU Bước 0: kiểm tra split
+[02:34:38] === XONG Bước 0: kiểm tra split (0.0 phút)
+[02:34:38] === BẮT ĐẦU Bonus: huấn luyện BON_F01 và DINOv2 linear probe
+[02:34:38] === BẮT ĐẦU BON_F01 train
+[02:45:06] === XONG BON_F01 train (10.5 phút)
+[02:45:06] === BẮT ĐẦU BON_DINO linear probe
+[02:49:15] === XONG BON_DINO linear probe (4.2 phút)
+[02:49:15] === XONG Bonus: huấn luyện BON_F01 và DINOv2 linear probe (14.6 phút)
+[02:49:15] === BẮT ĐẦU Bonus: lệch phân phối
+[02:51:05] === XONG Bonus: lệch phân phối (1.8 phút)
+[02:51:05] === BẮT ĐẦU Bonus: Grad-CAM
+[02:51:32] === XONG Bonus: Grad-CAM (0.4 phút)
+[02:51:32] === BẮT ĐẦU Bonus: ONNX
+[02:51:57] === XONG Bonus: ONNX (0.4 phút)
+[02:51:57] === BẮT ĐẦU Dọn dẹp
+[02:51:57] HOÀN TẤT sau 0.31 giờ
+[02:51:57] === XONG Dọn dẹp (0.0 phút)

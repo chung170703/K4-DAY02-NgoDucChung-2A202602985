@@ -1,0 +1,3 @@
+exp_id,seed,backbone,init,pretrained_tag,best_epoch,val_macro_f1,val_top1,val_loss,val_ece,sec_per_epoch,params_m,gmacs,epochs,img_size,aug,loss,mix,sampler,ema_decay,lr_backbone,lr_head,label_smoothing,class_weight_beta,batch_size
+BON_DINO,0,vit_small_patch14_dinov2.lvd142m,frozen,lvd142m,8,0.8743031732292634,0.8983147672093688,0.3015123415899018,0.027453143394455978,16.753182246299957,21.632265,6.12356544,10,224,basic,ce,,,,0.0001,0.001,0.0,,64
+BON_F01,0,convnext_tiny,finetune,in12k_ft_in1k,5,0.9703751013622062,0.9765781205369894,0.08294634071440228,0.005662925738255336,51.96531700069996,27.827049,4.454770176,10,224,basic,ce,,,0.99,0.0001,0.001,0.0,,64
