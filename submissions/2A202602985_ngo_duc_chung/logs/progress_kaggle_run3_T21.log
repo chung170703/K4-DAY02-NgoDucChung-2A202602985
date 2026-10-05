@@ -1,0 +1,14 @@
+[01:45:21] bắt đầu | nền tảng=Kaggle | Drive backup=None | workers=4 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[01:45:21] === BẮT ĐẦU Bước 0: kiểm tra split
+[01:45:21] === XONG Bước 0: kiểm tra split (0.0 phút)
+[01:45:21] === BẮT ĐẦU T21: kết hợp CE trọng số lớp + CutMix + EMA (3 seed, chỉ val)
+[01:45:21] === BẮT ĐẦU train T21 {'backbone': 'convnext_tiny', 'seed': 0, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99}
+[01:55:21] === XONG train T21 {'backbone': 'convnext_tiny', 'seed': 0, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99} (10.0 phút)
+[01:55:21] === BẮT ĐẦU train T21 {'backbone': 'convnext_tiny', 'seed': 1, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99}
+[02:04:59] === XONG train T21 {'backbone': 'convnext_tiny', 'seed': 1, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99} (9.6 phút)
+[02:04:59] === BẮT ĐẦU train T21 {'backbone': 'convnext_tiny', 'seed': 2, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99}
+[02:14:38] === XONG train T21 {'backbone': 'convnext_tiny', 'seed': 2, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99} (9.6 phút)
+[02:14:38] === XONG T21: kết hợp CE trọng số lớp + CutMix + EMA (3 seed, chỉ val) (29.3 phút)
+[02:14:38] === BẮT ĐẦU Dọn dẹp
+[02:14:38] HOÀN TẤT sau 0.50 giờ
+[02:14:38] === XONG Dọn dẹp (0.0 phút)

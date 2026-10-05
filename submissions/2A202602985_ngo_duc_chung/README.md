@@ -6,6 +6,7 @@ Kết quả chính (test fold 0, mean ± std qua 3 seed, cấu hình chọn bằ
 - **Notebook đầy đủ, chạy một mạch từ đầu** (tải dữ liệu → Bước 0–5 → Lab #2), tự chứa mã nguồn, dùng được trên Colab hoặc Kaggle. Đây là notebook của lượt 1: đã chạy thật tới giữa Bước 2 thì máy ảo bị thu hồi, và đã chạy hết ở chế độ thử (`LAB_SMOKE=1`); phần còn lại do notebook phục hồi bên dưới chạy (xem mục "Hai lượt chạy"):
   [`code/lab_day2_kaggle.ipynb`](code/lab_day2_kaggle.ipynb) · mở trên Colab: <https://colab.research.google.com/github/chung170703/K4-DAY02-NgoDucChung-2A202602985/blob/main/submissions/2A202602985_ngo_duc_chung/code/lab_day2_kaggle.ipynb>
 - **Notebook phục hồi** (phần chạy thành công trên Kaggle cho chung kết, mốc, Bước 3, Lab #2 — xem mục "Hai lượt chạy"): [`code/lab_day2_recovery.ipynb`](code/lab_day2_recovery.ipynb) · Colab: <https://colab.research.google.com/github/chung170703/K4-DAY02-NgoDucChung-2A202602985/blob/main/submissions/2A202602985_ngo_duc_chung/code/lab_day2_recovery.ipynb> · bản đã chạy trên Kaggle: <https://www.kaggle.com/code/chung140204/notebook119554a435> (notebook đặt chế độ riêng tư; bản nộp là file `.ipynb` trong repo).
+- **Notebook thí nghiệm tổ hợp T21** (CE trọng số lớp + CutMix + EMA, 3 seed, chỉ val): [`code/lab_day2_combo.ipynb`](code/lab_day2_combo.ipynb).
 - `code/lab_day2.ipynb` là bản Colab + Drive ban đầu (không dùng để sinh kết quả nộp).
 
 ## Thứ tự chạy lại
@@ -28,8 +29,8 @@ python eval.py grade --final "submissions/2A202602985_ngo_duc_chung/predictions/
 - Seed: mốc `T00` và chung kết `F01` 0, 1, 2; backbone và hầu hết ablation seed 0; ma trận Lab #2 (khởi tạo × CutMix) 0, 1, 2. Seed chỉ đổi khởi tạo head, thứ tự batch và augmentation, không đổi cách chia dữ liệu (fold 0 nguyên bản).
 - 10 epoch cho công thức nền (GUIDE: 10–15, giảm vì ngân sách GPU).
 
-## Hai lượt chạy (đọc trước khi chấm)
-Lượt 1 chạy trên Colab T4; sau khoảng 6 giờ, hạn mức GPU free cạn và máy ảo bị thu hồi giữa Bước 2, nên mất checkpoint và log của một số lần chạy. Phần kịp sao lưu: `run_logs_colab_run1/`, `predictions/` (B01–B07, T03, T09, T14), `predictions/colab_run1/` (T00), `logs/progress_colab_run1.log`, `tables/` (EDA, kiểm tra pipeline, độ trễ backbone). Lượt 2 chạy trên Kaggle T4 bằng `lab_day2_recovery.ipynb` với đúng các quyết định đã chốt bằng val ở lượt 1: chung kết `F01`, mốc `T00`, Bước 3, ma trận Lab #2 và các ablation bị mất. Số liệu `T00` của hai lượt có cột `lượt` riêng; Δ của mỗi ablation chỉ so với `T00` cùng lượt. Số liệu lượt 1 đã mất log được nêu ở Phụ lục B của báo cáo và không dùng để kết luận. Trước lượt 1 tôi có chạy thử cả pipeline 1 epoch trên Colab (gồm cả bước test, với mô hình chưa huấn luyện, kết quả bị bỏ).
+## Các lượt chạy (đọc trước khi chấm)
+Lượt 1 chạy trên Colab T4; sau khoảng 6 giờ, hạn mức GPU free cạn và máy ảo bị thu hồi giữa Bước 2, nên mất checkpoint và log của một số lần chạy. Phần kịp sao lưu: `run_logs_colab_run1/`, `predictions/` (B01–B07, T03, T09, T14), `predictions/colab_run1/` (T00), `logs/progress_colab_run1.log`, `tables/` (EDA, kiểm tra pipeline, độ trễ backbone). Lượt 3 (Kaggle T4, `lab_day2_combo.ipynb`) chỉ chạy thí nghiệm tổ hợp T21 trên val sau khi chung kết đã xong. Lượt 2 chạy trên Kaggle T4 bằng `lab_day2_recovery.ipynb` với đúng các quyết định đã chốt bằng val ở lượt 1: chung kết `F01`, mốc `T00`, Bước 3, ma trận Lab #2 và các ablation bị mất. Số liệu `T00` của hai lượt có cột `lượt` riêng; Δ của mỗi ablation chỉ so với `T00` cùng lượt. Số liệu lượt 1 đã mất log được nêu ở Phụ lục B của báo cáo và không dùng để kết luận. Trước lượt 1 tôi có chạy thử cả pipeline 1 epoch trên Colab (gồm cả bước test, với mô hình chưa huấn luyện, kết quả bị bỏ).
 
 ## Cấu trúc thư mục
 | Đường dẫn | Nội dung |

@@ -107,6 +107,23 @@ def main():
                                  [{"exp_id": "F01 (seed 0)", "trục": "F", "khác T00": "EMA 0.99 (đánh giá bằng trọng số EMA; cùng seed, cùng quá trình huấn luyện)",
                                    "seed": 0, "val_macro_f1": float(f01.val_macro_f1), "val_top1": float(f01.val_top1), **val_hard_f1(PRED, "F01", 0),
                                    "ghi chú": "F01 seed 0 chính là T00 seed 0 + EMA (EMA không đổi quá trình huấn luyện, chỉ đổi trọng số đánh giá); tương ứng ablation T16 của lượt 1"}])
+    # T21: tổ hợp CE trọng số lớp + CutMix + EMA (lượt 3, Kaggle, chỉ val), so cặp theo seed với T00 cùng lượt
+    t21 = load_runs(SUB / "run_logs")
+    t21 = t21[t21.exp_id == "T21"].sort_values("seed")
+    if len(t21):
+        t00k = kag[kag.exp_id == "T00"].set_index("seed")
+        for r in t21.itertuples():
+            d_pair = r.val_macro_f1 - float(t00k.loc[r.seed, "val_macro_f1"])
+            rows.append({"exp_id": "T21", "lượt": "Kaggle T4 (lượt 3, chỉ T21)", "backbone": "convnext_tiny", "trục": "kết hợp (C+B+F)",
+                         "khác T00": "CE trọng số lớp + CutMix + EMA 0.99", "seed": r.seed, "val_macro_f1": r.val_macro_f1, "val_top1": r.val_top1,
+                         "delta_vs_T00_seed0": r.val_macro_f1 - ref_k, "delta/σ": (r.val_macro_f1 - ref_k) / sig_k,
+                         "delta_vs_T00_mean": r.val_macro_f1 - mean_k, **val_hard_f1(PRED, "T21", r.seed),
+                         "ghi chú": f"tổ hợp; Δ so với T00 cùng seed = {d_pair:+.4f}"})
+        m, sd = float(t21.val_macro_f1.mean()), float(t21.val_macro_f1.std(ddof=1))
+        rows.append({"exp_id": "T21 (mean ± std, 3 seed)", "lượt": "Kaggle T4 (lượt 3, chỉ T21)", "backbone": "convnext_tiny", "trục": "kết hợp (C+B+F)",
+                     "khác T00": "CE trọng số lớp + CutMix + EMA 0.99", "seed": "0,1,2", "val_macro_f1": m, "val_top1": float(t21.val_top1.mean()),
+                     "delta_vs_T00_seed0": np.nan, "delta/σ": (m - mean_k) / sig_k, "delta_vs_T00_mean": m - mean_k,
+                     "ghi chú": f"mean macro-F1 val {m:.4f} ± {sd:.4f} so với T00 {mean_k:.4f} ± {sig_k:.4f}: {verdict(m - mean_k, max(sig_k, sd))}"})
     train_t = pd.DataFrame(rows)
 
     # ---------------- Inference ----------------

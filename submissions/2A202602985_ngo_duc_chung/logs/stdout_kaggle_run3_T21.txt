@@ -1,0 +1,153 @@
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+0.00s - Debugger warning: It seems that frozen modules are being used, which may
+0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+0.00s - to python to disable frozen modules.
+0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+/tmp/ipykernel_23/111441024.py:12: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+  tf.extractall(ROOT)
+
+/tmp/ipykernel_23/111441024.py:12: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+  tf.extractall(ROOT)
+python 3.13.15 | torch 2.11.0+cu128 | timm 1.0.29
+GPU: Tesla T4
+tải images.zip, lần 1
+MD5 OK
+17509 ảnh (kỳ vọng 17509) | /content/data
+[01:45:21] bắt đầu | nền tảng=Kaggle | Drive backup=None | workers=4 | SMOKE=False | IMG=224 | GPU=Tesla T4
+[01:45:21] === BẮT ĐẦU Bước 0: kiểm tra split
+Số ảnh: {'train': 10501, 'val': 3501, 'test': 3507} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '59.97%', 'val': '20.00%', 'test': '20.03%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      675   225   226
+1 Lantana           637   213   213
+2 Parkinsonia       618   206   207
+3 Parthenium        613   204   205
+4 Prickly Acacia    637   212   213
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        609   203   204
+8 Negatives        5463  1821  1822
+File thiếu trong /content/data: 0
+[01:45:21] === XONG Bước 0: kiểm tra split (0.0 phút)
+[01:45:21] === BẮT ĐẦU T21: kết hợp CE trọng số lớp + CutMix + EMA (3 seed, chỉ val)
+[01:45:21] === BẮT ĐẦU train T21 {'backbone': 'convnext_tiny', 'seed': 0, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99}
+[T21 seed0] thiết bị: cuda | AMP: True
+Số ảnh: {'train': 10501, 'val': 3501, 'test': 3507} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '59.97%', 'val': '20.00%', 'test': '20.03%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      675   225   226
+1 Lantana           637   213   213
+2 Parkinsonia       618   206   207
+3 Parthenium        613   204   205
+4 Prickly Acacia    637   212   213
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        609   203   204
+8 Negatives        5463  1821  1822
+File thiếu trong /content/data: 0
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+[T21 seed0] ep 1/10 loss 1.3957 | val loss 0.5700 F1 0.8145 top1 0.8175 | 59s
+[T21 seed0] ep 2/10 loss 0.9615 | val loss 0.3410 F1 0.8857 top1 0.8923 | 49s
+[T21 seed0] ep 3/10 loss 0.8549 | val loss 0.2966 F1 0.8992 top1 0.9077 | 49s
+[T21 seed0] ep 4/10 loss 0.7567 | val loss 0.2309 F1 0.9248 top1 0.9326 | 50s
+[T21 seed0] ep 5/10 loss 0.6925 | val loss 0.2103 F1 0.9354 top1 0.9409 | 49s
+[T21 seed0] ep 6/10 loss 0.6260 | val loss 0.2012 F1 0.9341 top1 0.9406 | 49s
+[T21 seed0] ep 7/10 loss 0.5795 | val loss 0.1538 F1 0.9522 top1 0.9583 | 49s
+[T21 seed0] ep 8/10 loss 0.5296 | val loss 0.1335 F1 0.9556 top1 0.9632 | 49s
+[T21 seed0] ep 9/10 loss 0.5003 | val loss 0.1197 F1 0.9606 top1 0.9683 | 49s
+[T21 seed0] ep 10/10 loss 0.4977 | val loss 0.1181 F1 0.9610 top1 0.9683 | 49s
+[01:55:21] === XONG train T21 {'backbone': 'convnext_tiny', 'seed': 0, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99} (10.0 phút)
+[01:55:21] === BẮT ĐẦU train T21 {'backbone': 'convnext_tiny', 'seed': 1, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99}
+[T21 seed1] thiết bị: cuda | AMP: True
+Số ảnh: {'train': 10501, 'val': 3501, 'test': 3507} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '59.97%', 'val': '20.00%', 'test': '20.03%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      675   225   226
+1 Lantana           637   213   213
+2 Parkinsonia       618   206   207
+3 Parthenium        613   204   205
+4 Prickly Acacia    637   212   213
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        609   203   204
+8 Negatives        5463  1821  1822
+File thiếu trong /content/data: 0
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+[T21 seed1] ep 1/10 loss 1.4924 | val loss 0.6836 F1 0.7887 top1 0.7772 | 50s
+[T21 seed1] ep 2/10 loss 0.9669 | val loss 0.4124 F1 0.8616 top1 0.8660 | 49s
+[T21 seed1] ep 3/10 loss 0.8222 | val loss 0.2896 F1 0.9090 top1 0.9169 | 50s
+[T21 seed1] ep 4/10 loss 0.7731 | val loss 0.2245 F1 0.9250 top1 0.9354 | 49s
+[T21 seed1] ep 5/10 loss 0.6728 | val loss 0.2042 F1 0.9362 top1 0.9440 | 49s
+[T21 seed1] ep 6/10 loss 0.6172 | val loss 0.1570 F1 0.9515 top1 0.9594 | 49s
+[T21 seed1] ep 7/10 loss 0.5485 | val loss 0.1487 F1 0.9523 top1 0.9600 | 49s
+[T21 seed1] ep 8/10 loss 0.5476 | val loss 0.1238 F1 0.9601 top1 0.9680 | 49s
+[T21 seed1] ep 9/10 loss 0.5269 | val loss 0.1183 F1 0.9585 top1 0.9669 | 49s
+[T21 seed1] ep 10/10 loss 0.4762 | val loss 0.1138 F1 0.9587 top1 0.9672 | 49s
+[02:04:59] === XONG train T21 {'backbone': 'convnext_tiny', 'seed': 1, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99} (9.6 phút)
+[02:04:59] === BẮT ĐẦU train T21 {'backbone': 'convnext_tiny', 'seed': 2, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99}
+[T21 seed2] thiết bị: cuda | AMP: True
+Số ảnh: {'train': 10501, 'val': 3501, 'test': 3507} | tổng 17509 | hợp (unique) 17509
+Tỉ lệ: {'train': '59.97%', 'val': '20.00%', 'test': '20.03%'}
+Giao: {'train∩val': 0, 'train∩test': 0, 'val∩test': 0}
+                  train   val  test
+0 Chinee Apple      675   225   226
+1 Lantana           637   213   213
+2 Parkinsonia       618   206   207
+3 Parthenium        613   204   205
+4 Prickly Acacia    637   212   213
+5 Rubber Vine       605   202   202
+6 Siam Weed         644   215   215
+7 Snake Weed        609   203   204
+8 Negatives        5463  1821  1822
+File thiếu trong /content/data: 0
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+
+/kaggle/working/submissions/2A202602985_ngo_duc_chung/code/train.py:209: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  scheduler.step()
+[T21 seed2] ep 1/10 loss 1.4505 | val loss 0.5942 F1 0.8042 top1 0.8075 | 50s
+[T21 seed2] ep 2/10 loss 0.9904 | val loss 0.3888 F1 0.8736 top1 0.8795 | 49s
+[T21 seed2] ep 3/10 loss 0.8375 | val loss 0.2973 F1 0.9012 top1 0.9075 | 50s
+[T21 seed2] ep 4/10 loss 0.7545 | val loss 0.2439 F1 0.9214 top1 0.9292 | 49s
+[T21 seed2] ep 5/10 loss 0.6815 | val loss 0.1812 F1 0.9453 top1 0.9517 | 49s
+[T21 seed2] ep 6/10 loss 0.6203 | val loss 0.1722 F1 0.9413 top1 0.9497 | 49s
+[T21 seed2] ep 7/10 loss 0.5881 | val loss 0.1737 F1 0.9427 top1 0.9497 | 49s
+[T21 seed2] ep 8/10 loss 0.5380 | val loss 0.1340 F1 0.9547 top1 0.9614 | 49s
+[T21 seed2] ep 9/10 loss 0.5358 | val loss 0.1284 F1 0.9577 top1 0.9646 | 49s
+[T21 seed2] ep 10/10 loss 0.5006 | val loss 0.1224 F1 0.9590 top1 0.9657 | 49s
+[02:14:38] === XONG train T21 {'backbone': 'convnext_tiny', 'seed': 2, 'loss': 'ce_weighted', 'mix': 'cutmix', 'mix_alpha': 1.0, 'ema_decay': 0.99} (9.6 phút)
+exp_id  seed  val_macro_f1  val_top1  best_epoch  val_ece  sec_per_epoch
+   T21     0      0.961038  0.968295          10 0.011349      50.054799
+   T21     1      0.960096  0.968009           8 0.015333      49.114431
+   T21     2      0.959006  0.965724          10 0.010870      49.152223
+mean macro-F1 val 0.9600, std 0.0010
+[02:14:38] === XONG T21: kết hợp CE trọng số lớp + CutMix + EMA (3 seed, chỉ val) (29.3 phút)
+[02:14:38] === BẮT ĐẦU Dọn dẹp
+đã xoá checkpoint: 334 MB | tổng thời gian 0.50 giờ
+[02:14:38] HOÀN TẤT sau 0.50 giờ
+[02:14:38] === XONG Dọn dẹp (0.0 phút)
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+[NbConvertApp] Writing 113203 bytes to __notebook__.ipynb
+[NbConvertApp] Converting notebook __notebook__.ipynb to html
+[NbConvertApp] Writing 414466 bytes to __results__.html
